@@ -1,0 +1,51 @@
+.header {
+  width: auto;
+  margin-left: 240px;
+  height: 56px;
+  background-color: rgb(255 255 255);
+  border-bottom-width: 1px;
+  border-color: rgb(243 244 246);
+  display: flex;
+  justify-content: space-between;
+}
+#clock {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  margin-left: 24px;
+  height: 55px;
+  width: 82.7px;
+}
+.sql-links {
+  display: flex;
+  align-items: center;
+  padding-right: 24px;
+  border: none;
+  background-color: #fff;
+  font-size: 16px;
+  justify-content: center;
+}
+.setOpen {
+  color: blueviolet;
+}
+
+.SQL-links-title {
+  margin: 0 0 0 8px;
+}
+#dropdownLinks {
+  color: black;
+  width: 189px;
+  padding: 8px 12px;
+}
+.sql-item {
+  margin: 0 0 0 8px;
+  font-size: 14px;
+}
+#dropdown-content {
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  right: 0;
+  top: 58px;
+}

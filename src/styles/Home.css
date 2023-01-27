@@ -1,0 +1,44 @@
+.main-home-section {
+  background-color: rgb(249 250 251);
+  padding: 24px 24px 24px 264px;
+  width: 100%;
+  z-index: -1;
+  height: 372px;
+}
+.card-content {
+  padding: 24px;
+  height: 324px;
+  position: relative;
+}
+.main-title {
+  margin: 0;
+  font-weight: 400;
+  font-size: 24px;
+}
+.running-on {
+  padding-top: 10px;
+  margin: 0;
+  color: #9ca3af;
+  font-size: 18px;
+}
+.northwind-desc {
+  margin: 0;
+  padding-top: 16px;
+  height: 64px;
+  line-height: 24px;
+}
+.link-in-desc {
+  display: contents;
+  padding: 0;
+  margin: 0;
+  color: #2563eb;
+}
+.northwind-image {
+  position: absolute;
+  width: 384px;
+  bottom: 16px;
+  right: 24px;
+}
+.one-string {
+  height: 40px;
+}
