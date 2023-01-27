@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { currentTime } from "../actions/live-clock";
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
+  const [time, setTime] = useState<string>(new Date().toLocaleTimeString());
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(new Date().toLocaleTimeString());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <div className="header">
-      <div id="clock">14:15:10</div>
+      <div id="clock">{time}</div>
 
       <div
         className="sql-links"
