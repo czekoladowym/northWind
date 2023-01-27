@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { currentTime } from "../actions/live-clock";
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
