@@ -3,11 +3,11 @@
   padding: 24px 24px 24px 264px;
   width: 100%;
   z-index: -1;
-  height: 372px;
+  height: auto;
 }
 .card-content {
   padding: 24px;
-  height: 324px;
+  height: auto;
   position: relative;
 }
 .main-title {

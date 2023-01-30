@@ -1,0 +1,58 @@
+body {
+  background-color: rgb(249 250 251);
+  height: 100vh;
+}
+.main-section {
+  padding: 24px 24px 24px 264px;
+  width: 100%;
+  height: auto;
+}
+.section-header {
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+}
+
+.page-title {
+  margin: 0;
+  padding: 12px 16px;
+  font-size: 16px;
+  flex-grow: 1;
+}
+.dark-icon {
+  color: black;
+}
+.section-header-icon {
+  justify-content: center;
+  padding: 12px 16px;
+  height: 48px;
+  width: 56px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-indent: 0;
+}
+tr {
+  display: table-row;
+  margin: 0;
+  width: 100%;
+  border: 1px solid rebeccapurple;
+}
+.avatar-icons-column {
+  height: 40px;
+  width: 48px;
+}
+p {
+  margin: 0;
+}
+th {
+  padding: 8px 12px;
+}
+.empty-column {
+  width: 30.65px;
+  height: 40px;
+}
+.title-column {
+  width: 22.08%;
+}

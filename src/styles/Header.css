@@ -31,11 +31,13 @@
 
 .SQL-links-title {
   margin: 0 0 0 8px;
+  line-height: 24px;
 }
 #dropdownLinks {
   color: black;
   width: 189px;
   padding: 8px 12px;
+  line-height: 20px;
 }
 .sql-item {
   margin: 0 0 0 8px;

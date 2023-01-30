@@ -1,0 +1,55 @@
+.main-home-section {
+  background-color: rgb(249 250 251);
+  padding: 24px 24px 24px 264px;
+  width: 100%;
+  z-index: -1;
+  height: auto;
+}
+.card-content {
+  background-color: rgb(249 250 251);
+  padding: 24px;
+  height: auto;
+  position: relative;
+}
+.main-table {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  width: 100%;
+}
+.table-section {
+  width: 49.36%;
+}
+.section-title {
+  margin: 0;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 400;
+}
+.section-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+}
+.activity {
+  padding-top: 24px;
+}
+.activity-desc {
+  margin: 0;
+  color: #1f2937;
+  font-size: 12px;
+}
+.log-section {
+  padding-top: 8px;
+}
+.log-time {
+  margin: 0;
+  color: #9ca3af;
+  font-size: 12px;
+}
+.select-count {
+  margin: 0;
+  font-size: 14px;
+  font-family: ui-monospace, monospace;
+  line-height: 20px;
+}

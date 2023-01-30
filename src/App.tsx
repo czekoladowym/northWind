@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "./styles/Sidebar.css";
 import "./styles/Header.css";
 import "./styles/Home.css";
+import "./styles/Dashboard.css";
+import "./styles/Suppliers.css";
 
 function App() {
   return (

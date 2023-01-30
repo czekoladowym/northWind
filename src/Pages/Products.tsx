@@ -5,7 +5,7 @@ export const Products = () => {
   return (
     <div>
       <Sidebar />
-      <h1>hello Products</h1>
+      <Header />
     </div>
   );
 };

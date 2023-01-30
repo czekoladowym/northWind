@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+
 export const Sidebar = () => {
   return (
     <aside className="sidebar">
@@ -7,45 +10,45 @@ export const Sidebar = () => {
       <p className="menu-label">General</p>
       <ul className="menu-list">
         <li>
-          <a href="/">
+          <NavLink className="menu-link" to="/">
             <span className="material-icons md-light">home</span>
             <p className="menu-item">Home</p>
-          </a>
-          <a href="/dash">
+          </NavLink>
+          <NavLink className="menu-link" to="/dash">
             <span className="material-icons md-light">display_settings</span>
             <p className="menu-item">Dashboard</p>
-          </a>
+          </NavLink>
         </li>
       </ul>
       <p className="menu-label">Backoffice</p>
       <ul className="menu-list">
         <li>
-          <a href="/suppliers">
+          <NavLink className="menu-link" to="/suppliers">
             <span className="material-icons md-light">inventory</span>
             <p className="menu-item">Suppliers</p>
-          </a>
-          <a href="/products">
+          </NavLink>
+          <NavLink className="menu-link" to="/products">
             <span className="material-icons md-light">
               production_quantity_limits
             </span>
             <p className="menu-item">Products</p>
-          </a>
-          <a href="/orders">
+          </NavLink>
+          <NavLink className="menu-link" to="/orders">
             <span className="material-icons md-light">shopping_cart</span>
             <p className="menu-item">Orders</p>
-          </a>
-          <a href="/employees">
+          </NavLink>
+          <NavLink className="menu-link" to="/employees">
             <span className="material-icons md-light">badge</span>
             <p className="menu-item">Employees</p>
-          </a>
-          <a href="/customers">
+          </NavLink>
+          <a className="menu-link" href="/customers">
             <span className="material-icons md-light">group</span>
             <p className="menu-item">Customers</p>
           </a>
-          <a href="/search">
+          <NavLink className="menu-link" to="/search">
             <span className="material-icons md-light">search</span>
             <p className="menu-item">Search</p>
-          </a>
+          </NavLink>
         </li>
       </ul>
     </aside>

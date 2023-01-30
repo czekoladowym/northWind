@@ -4,6 +4,7 @@ html {
 *,
 *:after,
 *:before {
+  border: 0 solid #e5e7eb;
   box-sizing: inherit;
 }
 body {
@@ -27,8 +28,10 @@ body {
   height: 56px;
   background-color: rgb(17 24 39);
   color: #fff;
+  line-height: 24px;
 }
 .font-black {
+  line-height: 24px;
   padding-right: 4.5px;
   font-weight: 900;
 }
@@ -48,7 +51,8 @@ ul {
   display: flex;
   flex-direction: column;
 }
-a {
+a,
+.menu-link {
   text-decoration: none;
   color: #d1d5db;
   display: flex;
@@ -56,7 +60,12 @@ a {
   padding: 8px 0;
   width: 240px;
 }
+.menu-link:hover {
+  background-color: rgb(55 65 81);
+}
+
 .menu-item {
+  line-height: 24px;
   margin: 0;
   flex-grow: 1;
 }
@@ -66,4 +75,7 @@ a {
   height: 24px;
   display: flex;
   justify-content: center;
+}
+.menu-link[aria-current="page"] {
+  background-color: #374151;
 }

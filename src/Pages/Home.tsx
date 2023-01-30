@@ -15,8 +15,8 @@ export const Home = () => {
             <a href="https://workers.cloudflare.com/" className="link-in-desc">
               Cloudflare Workers
             </a>
-            , and D1 - Cloudflare's newest SQL <br />
-            database, running on SQLite.
+            , and D1 - Cloudflare's newest SQL database, <br /> running on
+            SQLite.
           </p>
           <img
             className="northwind-image"
