@@ -12,7 +12,6 @@ body {
   display: flex;
   flex-direction: row;
 }
-
 .page-title {
   margin: 0;
   padding: 12px 16px;
@@ -28,16 +27,17 @@ body {
   height: 48px;
   width: 56px;
 }
-table {
+.suppliers-table {
+  text-align: left;
   width: 100%;
   border-collapse: collapse;
   text-indent: 0;
 }
-tr {
+.suppliers {
   display: table-row;
   margin: 0;
   width: 100%;
-  border: 1px solid rebeccapurple;
+  background-color: #fff;
 }
 .avatar-icons-column {
   height: 40px;
@@ -49,10 +49,28 @@ p {
 th {
   padding: 8px 12px;
 }
-.empty-column {
-  width: 30.65px;
-  height: 40px;
+.gray-row {
+  background-color: #f9fafb;
 }
-.title-column {
-  width: 22.08%;
+.rounded-full {
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+}
+.image-colomn {
+  position: absolute;
+  padding: 8px 12px;
+}
+.link-company {
+  text-decoration: none;
+  width: 100%;
+  padding: 0;
+  line-height: 24px;
+  color: #2563eb;
+}
+.row-item {
+  padding: 8px 12px;
+}
+.white-row {
+  background-color: #fff;
 }
