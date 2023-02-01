@@ -22,11 +22,10 @@
 .northwind-desc {
   margin: 0;
   padding-top: 16px;
-  height: 64px;
   line-height: 24px;
 }
 .link-in-desc {
-  /* display: contents; */
+  display: contents;
   padding: 0;
   margin: 0;
   color: #2563eb;
@@ -34,8 +33,10 @@
 .northwind-image {
   float: right;
   width: 384px;
-  margin-top: -63px;
 }
 .one-string {
   height: 40px;
+}
+.northwind-desc-block {
+  display: flex;
 }
