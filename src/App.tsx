@@ -6,6 +6,7 @@ import "./styles/Home.css";
 import "./styles/Dashboard.css";
 import "./styles/Suppliers.css";
 import "./styles/Search.css";
+import "./styles/Order.css";
 
 function App() {
   return (

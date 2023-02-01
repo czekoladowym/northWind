@@ -1,7 +1,3 @@
-body {
-  background-color: rgb(249 250 251);
-  height: 100vh;
-}
 .main-section {
   padding: 24px 24px 24px 264px;
   width: 100%;
@@ -27,50 +23,19 @@ body {
   height: 48px;
   width: 56px;
 }
-.suppliers-table,
-.products-table,
-.employees-table,
-.customers-table {
+.orders-table {
   text-align: left;
   width: 100%;
   border-collapse: collapse;
   text-indent: 0;
 }
-.suppliers,
-.products,
-.employees,
-.customers {
+.orders {
   display: table-row;
   margin: 0;
   width: 100%;
   background-color: #fff;
 }
-.avatar-icons-column {
-  height: 40px;
-  width: 48px;
-}
-p {
-  margin: 0;
-}
-th {
-  line-height: 24px;
-  padding: 8px 12px;
-}
-.gray-row {
-  background-color: #f9fafb;
-}
-.rounded-full {
-  border-radius: 50%;
-  height: 24px;
-  width: 24px;
-}
-.image-colomn {
-  position: absolute;
-  padding: 8px 12px;
-}
-.link-company,
-.link-name,
-.link-employees {
+.blue-id {
   text-decoration: none;
   width: 100%;
   padding: 0;
@@ -79,7 +44,4 @@ th {
 }
 .row-item {
   padding: 8px 12px;
-}
-.white-row {
-  background-color: #fff;
 }
