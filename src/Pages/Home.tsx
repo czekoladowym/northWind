@@ -15,8 +15,7 @@ export const Home = () => {
             <a href="https://workers.cloudflare.com/" className="link-in-desc">
               Cloudflare Workers
             </a>
-            , and D1 - Cloudflare's newest SQL database, <br /> running on
-            SQLite.
+            , and D1 - Cloudflare's newest SQL database, running on SQLite.
           </p>
           <img
             className="northwind-image"
@@ -44,8 +43,8 @@ export const Home = () => {
           </p>
           <p className="northwind-desc">
             You can use the UI to explore Supplies, Orders, Customers, Employees
-            and Products, or you can use search if you know what <br /> you're
-            looking for.
+            and Products, or you can use search if you know what you're looking
+            for.
           </p>
         </div>
       </main>
