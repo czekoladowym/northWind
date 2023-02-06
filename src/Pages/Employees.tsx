@@ -1,7 +1,44 @@
 import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
+import { useState, useEffect } from "react";
+import axios, { AxiosResponse } from "axios";
+
+type Employee = {
+  name: string;
+  title: string;
+  city: string;
+  phone: string;
+  country: string;
+};
+type Logs = {
+  sql: string;
+  date: string;
+  requestTime: string;
+};
+
+type Response = {
+  content: Employee[];
+  logs: Logs;
+};
 
 export const Employees = () => {
+  const [content, setContent] = useState<Employee[]>([]);
+  useEffect(() => {
+    const getContent = async () => {
+      const res: AxiosResponse<Response> = await axios.get(
+        "https://nortwind-backend-rodkin.onrender.com/employees"
+      );
+      setContent(res.data.content);
+    };
+
+    getContent();
+  }, []);
+  function abbreviateName(name: string) {
+    return name
+      .split(" ")
+      .map((part) => part[0].toUpperCase())
+      .join("-");
+  }
   return (
     <div>
       <Sidebar />
@@ -24,40 +61,27 @@ export const Employees = () => {
             <th></th>
           </thead>
           <tbody>
-            <tr className="gray-row">
-              <td className="image-colomn">
-                <img
-                  src="https://avatars.dicebear.com/v2/initials/Charlotte-Cooper.svg"
-                  className="rounded-full"
-                />
-              </td>
-              <td className="row-item">
-                <a className="link-employees" href="/supplier/1">
-                  Exotic Liquids
-                </a>
-              </td>
-              <td className="row-item">Charlotte Cooper</td>
-              <td className="row-item">Purchasing Manager</td>
-              <td className="row-item">London</td>
-              <td className="row-item">UK</td>
-            </tr>
-            <tr className="white-row">
-              <td className="image-colomn">
-                <img
-                  src="https://avatars.dicebear.com/v2/initials/Shelley-Burke.svg"
-                  className="rounded-full"
-                />
-              </td>
-              <td className="row-item">
-                <a className="link-employees" href="/supplier/2">
-                  New Orleans Cajun Delights
-                </a>
-              </td>
-              <td className="row-item">Shelley Burke</td>
-              <td className="row-item">Order Administrator</td>
-              <td className="row-item">New Orleans</td>
-              <td className="row-item">USA</td>
-            </tr>
+            {content.map((employee, i) => (
+              <tr>
+                <td className="image-colomn">
+                  <img
+                    src={`https://avatars.dicebear.com/v2/initials/${abbreviateName(
+                      employee.name
+                    )}.svg`}
+                    className="rounded-full"
+                  />
+                </td>
+                <td className="row-item">
+                  <a className="link-employees" href="#">
+                    {employee.name}
+                  </a>
+                </td>
+                <td className="row-item">{employee.title}</td>
+                <td className="row-item">{employee.city}</td>
+                <td className="row-item">{employee.phone}</td>
+                <td className="row-item">{employee.country}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </main>

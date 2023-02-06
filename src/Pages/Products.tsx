@@ -1,7 +1,38 @@
 import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
+import { useState, useEffect } from "react";
+import axios, { Axios, AxiosResponse } from "axios";
+
+type Product = {
+  name: string;
+  qtPerUnit: string;
+  price: string;
+  stock: string;
+  orders: string;
+};
+type Logs = {
+  sql: string;
+  date: string;
+  requestTime: string;
+};
+
+type Response = {
+  content: Product[];
+  logs: Logs;
+};
 
 export const Products = () => {
+  const [content, setContent] = useState<Product[]>([]);
+  useEffect(() => {
+    const getContent = async () => {
+      const res: AxiosResponse<Response> = await axios.get(
+        "https://nortwind-backend-rodkin.onrender.com/products"
+      );
+      setContent(res.data.content);
+    };
+
+    getContent();
+  }, []);
   return (
     <div>
       <Sidebar />
@@ -23,28 +54,19 @@ export const Products = () => {
             <th></th>
           </thead>
           <tbody>
-            <tr className="gray-row">
-              <td className="row-item">
-                <a href="products/1" className="link-name">
-                  Chai
-                </a>
-              </td>
-              <td className="row-item">10 boxes x 20 bags</td>
-              <td className="row-item">$18</td>
-              <td className="row-item">39</td>
-              <td className="row-item">0</td>
-            </tr>
-            <tr className="white-row">
-              <td className="row-item">
-                <a href="products/2" className="link-name">
-                  Chang
-                </a>
-              </td>
-              <td className="row-item">24 - 12 oz bottles</td>
-              <td className="row-item">$19</td>
-              <td className="row-item">17</td>
-              <td className="row-item">40</td>
-            </tr>
+            {content.map((product, id) => (
+              <tr>
+                <td className="row-item">
+                  <a href="#" className="blue-id">
+                    {product.name}
+                  </a>
+                </td>
+                <td className="row-item">{product.qtPerUnit}</td>
+                <td className="row-item">{"$" + product.price}</td>
+                <td className="row-item">{product.stock}</td>
+                <td className="row-item">{product.orders}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </main>

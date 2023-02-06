@@ -45,3 +45,6 @@
 .row-item {
   padding: 8px 12px;
 }
+tr:nth-child(even) {
+  background-color: #fff;
+}

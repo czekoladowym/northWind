@@ -1,13 +1,13 @@
 .search-title {
   margin: 0 0 8px 0;
   font-size: 16px;
-  line-height: 20px;
+  line-height: 24px;
   font-family: system-ui, Arial, sans-serif;
 }
 .search-content {
   position: relative;
   padding: 24px;
-  height: auto;
+  height: 400px;
   width: 100%;
   background-color: #fff;
 }
@@ -17,13 +17,13 @@
 .input-search {
   width: 50%;
   height: 40px;
-  padding: 8px 12px 8px 40px;
+  padding: 14px 12px 8px 40px;
   font-size: 100%;
   border: 1px solid rgb(156 163 175);
   border-radius: 4px;
 }
 ::placeholder {
-  opacity: 0.7;
+  opacity: 0.8;
   font-family: system-ui, Arial, sans-serif;
 }
 .input-search:focus {
@@ -36,4 +36,94 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.tables {
+  margin: 0 0 8px 0;
+}
+
+.search-table {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-radio {
+  display: flex;
+  flex-direction: row;
+  height: 27.6px;
+}
+.container-radio {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 12px;
+  margin-right: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.container-radio input {
+  position: absolute;
+  display: none;
+  opacity: 0;
+}
+.checkmark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 2px;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+}
+.container-radio:hover input ~ .checkmark {
+  border-color: rgb(209 213 219);
+}
+
+.container-radio input:checked ~ .checkmark {
+  background-color: #3b82f6;
+  border: 4px;
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.container-radio input:checked ~ .checkmark:after {
+  display: block;
+}
+.container-radio .checkmark:after {
+  border: 1px solid rgb(59 130 246);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: white;
+}
+
+.results {
+  margin: 0;
+  font-size: 18px;
+  line-height: 28px;
+}
+.product-section {
+  margin: 8px 0 0;
+  display: flex;
+  flex-direction: column;
+}
+.search-link {
+  color: #2563eb;
+  line-height: 24px;
+  text-decoration: none;
+}
+.search-info {
+  color: #9ca3af;
+  font-size: 14px;
+  line-height: 20px;
 }

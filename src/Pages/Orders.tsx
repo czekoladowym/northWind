@@ -1,7 +1,43 @@
 import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
+import { useEffect, useState } from "react";
+import axios, { AxiosResponse } from "axios";
+
+type Order = {
+  id: string;
+  price: string;
+  products: string;
+  quantity: string;
+  shipped: string;
+  shipName: string;
+  city: string;
+  country: string;
+};
+type Logs = {
+  sql: string;
+  date: string;
+  requestTime: string;
+};
+
+type Response = {
+  content: Order[];
+  logs: Logs;
+};
 
 export const Orders = () => {
+  const [content, setContent] = useState<Order[]>([]);
+
+  useEffect(() => {
+    const getContent = async () => {
+      const res: AxiosResponse<Response> = await axios.get(
+        "https://nortwind-backend-rodkin.onrender.com/orders"
+      );
+      setContent(res.data.content);
+    };
+
+    getContent();
+  }, []);
+
   return (
     <div>
       <Sidebar />
@@ -15,45 +51,33 @@ export const Orders = () => {
         </div>
         <table className="orders-table">
           <thead className="orders">
-            <th className="id-colomn">Id</th>
-            <th className="price-colomn">Total Price</th>
-            <th className="products-colomn">Products</th>
-            <th className="quantity-colomn">Quantity</th>
-            <th className="shipped-colomn">Shipped</th>
-            <th className="ship-name-colomn">Ship Name</th>
-            <th className="city-colomn">City</th>
-            <th className="city-colomn">Country</th>
+            <th>Id</th>
+            <th>Total Price</th>
+            <th>Products</th>
+            <th>Quantity</th>
+            <th>Shipped</th>
+            <th>Ship Name</th>
+            <th>City</th>
+            <th>Country</th>
             <th></th>
           </thead>
           <tbody>
-            <tr className="gray-row">
-              <td className="row-item">
-                <a href="/order/1" className="blue-id">
-                  10248
-                </a>
-              </td>
-              <td className="row-item">$440.00</td>
-              <td className="row-item">3</td>
-              <td className="row-item">27</td>
-              <td className="row-item">2012-07-04</td>
-              <td className="row-item">Vins et alcools Chevalier</td>
-              <td className="row-item">Reims</td>
-              <td className="row-item">France</td>
-            </tr>
-            <tr className="white-row">
-              <td className="row-item">
-                <a href="/order/2" className="blue-id">
-                  10249
-                </a>
-              </td>
-              <td className="row-item">$1863.40</td>
-              <td className="row-item">2</td>
-              <td className="row-item">49</td>
-              <td className="row-item">2012-07-05</td>
-              <td className="row-item">Toms Spezialitäten</td>
-              <td className="row-item">Münster</td>
-              <td className="row-item">Germany</td>
-            </tr>
+            {content.map((orders, i) => (
+              <tr>
+                <td className="row-item">
+                  <a href="#" className="blue-id">
+                    {orders.id}
+                  </a>
+                </td>
+                <td className="row-item">{"$" + orders.price}</td>
+                <td className="row-item">{orders.products}</td>
+                <td className="row-item">{orders.quantity}</td>
+                <td className="row-item">{orders.shipped}</td>
+                <td className="row-item">{orders.shipName}</td>
+                <td className="row-item">{orders.city}</td>
+                <td className="row-item">{orders.country}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </main>

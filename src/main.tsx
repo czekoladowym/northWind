@@ -2,13 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Dashboard } from "./Pages/Dashboard";
-import { Suppliers } from "./Pages/Suppliers";
-import { Products } from "./Pages/Products";
-import { Orders } from "./Pages/Orders";
-import { Employees } from "./Pages/Employees";
-import { Customers } from "./Pages/Customers";
-import { Search } from "./Pages/Search";
+import { Dashboard } from "./pages/Dashboard";
+import { Suppliers } from "./pages/Suppliers";
+import { Products } from "./pages/Products";
+import { Orders } from "./pages/Orders";
+import { Employees } from "./pages/Employees";
+import { Customers } from "./pages/Customers";
+import { Search } from "./pages/Search";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

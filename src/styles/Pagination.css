@@ -1,0 +1,11 @@
+.pagination {
+  height: 100px;
+  width: 500px;
+  background-color: black;
+  margin: 0 auto;
+}
+.page-coll {
+  width: 25px;
+  height: 25px;
+  background-color: beige;
+}

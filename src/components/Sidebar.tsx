@@ -41,10 +41,10 @@ export const Sidebar = () => {
             <span className="material-icons md-light">badge</span>
             <p className="menu-item">Employees</p>
           </NavLink>
-          <a className="menu-link" href="/customers">
+          <NavLink className="menu-link" to="/customers">
             <span className="material-icons md-light">group</span>
             <p className="menu-item">Customers</p>
-          </a>
+          </NavLink>
           <NavLink className="menu-link" to="/search">
             <span className="material-icons md-light">search</span>
             <p className="menu-item">Search</p>
