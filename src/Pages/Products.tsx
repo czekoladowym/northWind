@@ -5,6 +5,9 @@ import axios, { Axios, AxiosResponse } from "axios";
 import { Pagination } from "../components/Pagination";
 
 type Product = {
+  // CHANGE GAVNO
+  id: string;
+  // ----------------
   name: string;
   qtPerUnit: string;
   price: string;
@@ -80,7 +83,7 @@ export const Products = () => {
           </thead>
           <tbody>
             {currentContent.map((product, id) => (
-              <tr>
+              <tr key={id}>
                 <td className="row-item">
                   <a href="#" className="blue-id">
                     {product.name}

@@ -92,7 +92,7 @@ export const Customers = () => {
           </thead>
           <tbody>
             {currentContent.map((customer, i) => (
-              <tr>
+              <tr key={customer.customerID}>
                 <td className="image-colomn">
                   <img
                     src={`https://avatars.dicebear.com/v2/initials/${abbreviateName(

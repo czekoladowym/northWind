@@ -18,8 +18,8 @@ export const Pagination = ({
     <div className="pagination-block">
       <ul className="pagination-list">
         {pageNum.map((number) => (
-          <div>
-            <div className="paginate-item" key={number}>
+          <div key={number}>
+            <div className="paginate-item">
               <a
                 onClick={() => paginate(number)}
                 href="#"

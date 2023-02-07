@@ -85,20 +85,20 @@ export const Orders = () => {
             <th></th>
           </thead>
           <tbody>
-            {currentContent.map((orders, i) => (
-              <tr>
+            {currentContent.map((order, i) => (
+              <tr key={order.id}>
                 <td className="row-item">
                   <a href="#" className="blue-id">
-                    {orders.id}
+                    {order.id}
                   </a>
                 </td>
-                <td className="row-item">{"$" + orders.price}</td>
-                <td className="row-item">{orders.products}</td>
-                <td className="row-item">{orders.quantity}</td>
-                <td className="row-item">{orders.shipped}</td>
-                <td className="row-item">{orders.shipName}</td>
-                <td className="row-item">{orders.city}</td>
-                <td className="row-item">{orders.country}</td>
+                <td className="row-item">{"$" + order.price}</td>
+                <td className="row-item">{order.products}</td>
+                <td className="row-item">{order.quantity}</td>
+                <td className="row-item">{order.shipped}</td>
+                <td className="row-item">{order.shipName}</td>
+                <td className="row-item">{order.city}</td>
+                <td className="row-item">{order.country}</td>
               </tr>
             ))}
           </tbody>

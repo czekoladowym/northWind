@@ -31,7 +31,7 @@ type Response = {
   logs: Logs;
 };
 
-export const Search = () => {
+const Search = () => {
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [seacrhValue, setSeacrhValue] = useState<string>("");
@@ -88,6 +88,7 @@ export const Search = () => {
                     type="radio"
                     name="radio-input"
                     checked={table == "products"}
+                    onChange={() => {}}
                   />
                   <span className="checkmark"></span>
                 </label>
@@ -99,6 +100,7 @@ export const Search = () => {
                   <input
                     type="radio"
                     name="radio-input"
+                    onChange={() => {}}
                     checked={table == "customers"}
                   />
                   <span className="checkmark"></span>
@@ -110,7 +112,7 @@ export const Search = () => {
               <section>
                 {table == "products"
                   ? products.map((product, i) => (
-                      <div className="product-section">
+                      <div className="product-section" key={i}>
                         <a href="#" className="search-link">
                           {product.name}
                         </a>
@@ -122,7 +124,10 @@ export const Search = () => {
                       </div>
                     ))
                   : customers.map((customer, i) => (
-                      <div className="product-section">
+                      <div
+                        className="product-section"
+                        key={customer.customerID}
+                      >
                         <a className="search-link">{customer.companyName}</a>
                         <p className="search-info">
                           {"#" + (customers.indexOf(customer) + 1)}, Contact:{" "}
@@ -139,3 +144,5 @@ export const Search = () => {
     </div>
   );
 };
+
+export default Search;

@@ -5,6 +5,7 @@ import axios, { AxiosResponse } from "axios";
 import { Pagination } from "../components/Pagination";
 
 type Employee = {
+  id: string;
   name: string;
   title: string;
   city: string;
@@ -87,6 +88,7 @@ export const Employees = () => {
           </thead>
           <tbody>
             {currentContent.map((employee, i) => (
+              // ENTER ID
               <tr>
                 <td className="image-colomn">
                   <img

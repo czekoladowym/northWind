@@ -91,7 +91,7 @@ export const Suppliers = () => {
           </thead>
           <tbody>
             {currentContent.map((supplier, i) => (
-              <tr>
+              <tr key={supplier.id}>
                 <td className="image-colomn">
                   <img
                     src={`https://avatars.dicebear.com/v2/initials/${abbreviateName(
