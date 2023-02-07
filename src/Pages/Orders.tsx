@@ -2,6 +2,7 @@ import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
 import { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
+import { Pagination } from "../components/Pagination";
 
 type Order = {
   id: string;
@@ -26,18 +27,40 @@ type Response = {
 
 export const Orders = () => {
   const [content, setContent] = useState<Order[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [contentPerPage] = useState<number>(20);
 
   useEffect(() => {
+    setLoading(true);
     const getContent = async () => {
       const res: AxiosResponse<Response> = await axios.get(
         "https://nortwind-backend-rodkin.onrender.com/orders"
       );
       setContent(res.data.content);
+      setLoading(false);
     };
-
     getContent();
   }, []);
 
+  const paginate = (pageNum: number) => setCurrentPage(pageNum);
+
+  // get current content
+  const indexOfLastContent = currentPage * contentPerPage;
+  const indexOfFirstContent = indexOfLastContent - contentPerPage;
+  const currentContent = content.slice(indexOfFirstContent, indexOfLastContent);
+
+  if (loading) {
+    return (
+      <div>
+        <Sidebar />
+        <Header />
+        <main className="main-section">
+          <h1 className="loading">Loading orders...</h1>
+        </main>
+      </div>
+    );
+  }
   return (
     <div>
       <Sidebar />
@@ -62,7 +85,7 @@ export const Orders = () => {
             <th></th>
           </thead>
           <tbody>
-            {content.map((orders, i) => (
+            {currentContent.map((orders, i) => (
               <tr>
                 <td className="row-item">
                   <a href="#" className="blue-id">
@@ -80,6 +103,11 @@ export const Orders = () => {
             ))}
           </tbody>
         </table>
+        <Pagination
+          contentPerPage={contentPerPage}
+          totalContent={content.length}
+          paginate={paginate}
+        />
       </main>
     </div>
   );

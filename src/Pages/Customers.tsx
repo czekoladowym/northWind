@@ -26,22 +26,39 @@ type Response = {
 
 export const Customers = () => {
   const [content, setContent] = useState<Customer[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [contentPerPage] = useState<number>(20);
   useEffect(() => {
+    setLoading(true);
     const getContent = async () => {
       const res: AxiosResponse<Response> = await axios.get(
         "https://nortwind-backend-rodkin.onrender.com/customers"
       );
       setContent(res.data.content);
+      setLoading(false);
     };
-
     getContent();
   }, []);
 
-  const lastContentIndex = currentPage * contentPerPage;
-  const firstContentIndex = lastContentIndex - contentPerPage;
-  const currentContent = content.slice(firstContentIndex, lastContentIndex);
+  const paginate = (pageNum: number) => setCurrentPage(pageNum);
+
+  // get current content
+  const indexOfLastContent = currentPage * contentPerPage;
+  const indexOfFirstContent = indexOfLastContent - contentPerPage;
+  const currentContent = content.slice(indexOfFirstContent, indexOfLastContent);
+
+  if (loading) {
+    return (
+      <div>
+        <Sidebar />
+        <Header />
+        <main className="main-section">
+          <h1 className="loading">Loading customers...</h1>
+        </main>
+      </div>
+    );
+  }
 
   function abbreviateName(name: string) {
     const nameSplitted = name.trimEnd().split(" ");
@@ -74,7 +91,7 @@ export const Customers = () => {
             <th></th>
           </thead>
           <tbody>
-            {content.map((customer, i) => (
+            {currentContent.map((customer, i) => (
               <tr>
                 <td className="image-colomn">
                   <img
@@ -97,11 +114,12 @@ export const Customers = () => {
             ))}
           </tbody>
         </table>
+        <Pagination
+          contentPerPage={contentPerPage}
+          totalContent={content.length}
+          paginate={paginate}
+        />
       </main>
-      <Pagination
-        contentPerPage={contentPerPage}
-        totalContent={content.length}
-      />
     </div>
   );
 };

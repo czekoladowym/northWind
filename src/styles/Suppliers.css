@@ -84,3 +84,10 @@ th {
 .white-row {
   background-color: #fff;
 }
+.loading {
+  line-height: 24px;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 24px;
+}

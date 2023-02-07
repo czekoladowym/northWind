@@ -1,17 +1,34 @@
-export const Pagination = (contentPerPage: any, totalContent: any) => {
+type Pagination = {
+  contentPerPage: number;
+  totalContent: number;
+  paginate: Function;
+};
+
+export const Pagination = ({
+  contentPerPage,
+  totalContent,
+  paginate,
+}: Pagination) => {
   const pageNum = [];
   for (let i = 1; i <= Math.ceil(totalContent / contentPerPage); i++) {
     pageNum.push(i);
   }
+
   return (
     <div className="pagination-block">
-      <ul className="pagination">
+      <ul className="pagination-list">
         {pageNum.map((number) => (
-          <button className="page-coll" key={number}>
-            <a href="!#" className="page-link">
-              {number}
-            </a>
-          </button>
+          <div>
+            <div className="paginate-item" key={number}>
+              <a
+                onClick={() => paginate(number)}
+                href="#"
+                className="paginate-link"
+              >
+                {number}
+              </a>
+            </div>
+          </div>
         ))}
       </ul>
     </div>

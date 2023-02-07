@@ -1,5 +1,6 @@
 .header {
-  width: auto;
+  position: sticky;
+  top: 0px;
   margin-left: 240px;
   height: 56px;
   background-color: rgb(255 255 255);
@@ -7,6 +8,7 @@
   border-color: rgb(243 244 246);
   display: flex;
   justify-content: space-between;
+  z-index: 1;
 }
 #clock {
   display: flex;

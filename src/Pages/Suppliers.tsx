@@ -2,7 +2,7 @@ import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
 import { useState, useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
-import { Buffer } from "buffer";
+import { Pagination } from "../components/Pagination";
 
 type Supplier = {
   id: string;
@@ -25,12 +25,17 @@ type Response = {
 
 export const Suppliers = () => {
   const [content, setContent] = useState<Supplier[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [contentPerPage] = useState<number>(20);
   useEffect(() => {
     const getContent = async () => {
+      setLoading(true);
       const res: AxiosResponse<Response> = await axios.get(
         "https://nortwind-backend-rodkin.onrender.com/suppliers"
       );
       setContent(res.data.content);
+      setLoading(false);
     };
 
     getContent();
@@ -41,8 +46,27 @@ export const Suppliers = () => {
       "-",
       nameSplitted[nameSplitted.length - 1]
     );
-
     return nameRes;
+  }
+
+  // change page
+  const paginate = (pageNum: number) => setCurrentPage(pageNum);
+
+  // get current content
+  const indexOfLastContent = currentPage * contentPerPage;
+  const indexOfFirstContent = indexOfLastContent - contentPerPage;
+  const currentContent = content.slice(indexOfFirstContent, indexOfLastContent);
+
+  if (loading) {
+    return (
+      <div>
+        <Sidebar />
+        <Header />
+        <main className="main-section">
+          <h1 className="loading">Loading suppliers...</h1>
+        </main>
+      </div>
+    );
   }
   return (
     <div>
@@ -66,7 +90,7 @@ export const Suppliers = () => {
             <th></th>
           </thead>
           <tbody>
-            {content.map((supplier, i) => (
+            {currentContent.map((supplier, i) => (
               <tr>
                 <td className="image-colomn">
                   <img
@@ -89,6 +113,11 @@ export const Suppliers = () => {
             ))}
           </tbody>
         </table>
+        <Pagination
+          contentPerPage={contentPerPage}
+          totalContent={content.length}
+          paginate={paginate}
+        />
       </main>
     </div>
   );

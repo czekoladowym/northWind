@@ -2,6 +2,7 @@ import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
 import { useState, useEffect } from "react";
 import axios, { Axios, AxiosResponse } from "axios";
+import { Pagination } from "../components/Pagination";
 
 type Product = {
   name: string;
@@ -23,16 +24,40 @@ type Response = {
 
 export const Products = () => {
   const [content, setContent] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [contentPerPage] = useState<number>(20);
   useEffect(() => {
+    setLoading(true);
     const getContent = async () => {
       const res: AxiosResponse<Response> = await axios.get(
         "https://nortwind-backend-rodkin.onrender.com/products"
       );
       setContent(res.data.content);
+      setLoading(false);
     };
 
     getContent();
   }, []);
+  // change page
+  const paginate = (pageNum: number) => setCurrentPage(pageNum);
+
+  // get current content
+  const indexOfLastContent = currentPage * contentPerPage;
+  const indexOfFirstContent = indexOfLastContent - contentPerPage;
+  const currentContent = content.slice(indexOfFirstContent, indexOfLastContent);
+
+  if (loading) {
+    return (
+      <div>
+        <Sidebar />
+        <Header />
+        <main className="main-section">
+          <h1 className="loading">Loading products...</h1>
+        </main>
+      </div>
+    );
+  }
   return (
     <div>
       <Sidebar />
@@ -54,7 +79,7 @@ export const Products = () => {
             <th></th>
           </thead>
           <tbody>
-            {content.map((product, id) => (
+            {currentContent.map((product, id) => (
               <tr>
                 <td className="row-item">
                   <a href="#" className="blue-id">
@@ -69,6 +94,11 @@ export const Products = () => {
             ))}
           </tbody>
         </table>
+        <Pagination
+          contentPerPage={contentPerPage}
+          totalContent={content.length}
+          paginate={paginate}
+        />
       </main>
     </div>
   );

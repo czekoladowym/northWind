@@ -2,6 +2,7 @@ import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
 import { useState, useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
+import { Pagination } from "../components/Pagination";
 
 type Employee = {
   name: string;
@@ -23,21 +24,45 @@ type Response = {
 
 export const Employees = () => {
   const [content, setContent] = useState<Employee[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [contentPerPage] = useState<number>(20);
   useEffect(() => {
+    setLoading(true);
     const getContent = async () => {
       const res: AxiosResponse<Response> = await axios.get(
         "https://nortwind-backend-rodkin.onrender.com/employees"
       );
       setContent(res.data.content);
+      setLoading(false);
     };
-
     getContent();
   }, []);
+
   function abbreviateName(name: string) {
     return name
       .split(" ")
       .map((part) => part[0].toUpperCase())
       .join("-");
+  }
+
+  const paginate = (pageNum: number) => setCurrentPage(pageNum);
+
+  // get current content
+  const indexOfLastContent = currentPage * contentPerPage;
+  const indexOfFirstContent = indexOfLastContent - contentPerPage;
+  const currentContent = content.slice(indexOfFirstContent, indexOfLastContent);
+
+  if (loading) {
+    return (
+      <div>
+        <Sidebar />
+        <Header />
+        <main className="main-section">
+          <h1 className="loading">Loading orders...</h1>
+        </main>
+      </div>
+    );
   }
   return (
     <div>
@@ -61,7 +86,7 @@ export const Employees = () => {
             <th></th>
           </thead>
           <tbody>
-            {content.map((employee, i) => (
+            {currentContent.map((employee, i) => (
               <tr>
                 <td className="image-colomn">
                   <img
@@ -84,6 +109,11 @@ export const Employees = () => {
             ))}
           </tbody>
         </table>
+        <Pagination
+          contentPerPage={contentPerPage}
+          totalContent={content.length}
+          paginate={paginate}
+        />
       </main>
     </div>
   );
