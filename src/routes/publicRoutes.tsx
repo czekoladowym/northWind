@@ -1,11 +1,11 @@
-import { Home } from "../pages/Home";
-import { Orders } from "../pages/Orders";
-import { Products } from "../pages/Products";
-import { Suppliers } from "../pages/Suppliers";
-import { Dashboard } from "../pages/Dashboard";
-import { Employees } from "../pages/Employees";
-import { Customers } from "../pages/Customers";
-import Search from "../pages/Search";
+import { Home } from "./../pages/Home";
+import { Dashboard } from "./../pages/Dashboard";
+import { Suppliers } from "./../pages/Suppliers";
+import { Products } from "./../pages/Products";
+import { Orders } from "./../pages/Orders";
+import { Employees } from "./../pages/Employees";
+import { Customers } from "./../pages/Customers";
+import Search from "./../pages/Search";
 
 export const publicRoutes = [
   {
