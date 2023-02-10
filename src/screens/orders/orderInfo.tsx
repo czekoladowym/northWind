@@ -8,6 +8,7 @@ import { addLogAction, addResultAction } from "../../store/actions/logActions";
 import { Logs } from "../customers/Customers";
 
 type ProductsOrder = {
+  id: string;
   product: string;
   quantity: number;
   orderPrice: string;
@@ -118,7 +119,7 @@ const OrderInfo = () => {
               </div>
               <div className="id-field-content without-margin">
                 <h1 className="id-header">Freight</h1>
-                <p className="id-desc">{"$" + order?.freight}</p>
+                <p className="id-desc">{order?.freight}</p>
               </div>
             </div>
             <div className="id-field-card">
@@ -171,7 +172,7 @@ const OrderInfo = () => {
               {order?.productsInOrder.map((product) => (
                 <tr>
                   <td className="row-item">
-                    <Link className="blue-id" to={`/products`}>
+                    <Link className="blue-id" to={`/products/${product.id}`}>
                       {product.product}
                     </Link>
                   </td>
