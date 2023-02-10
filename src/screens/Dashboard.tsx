@@ -1,7 +1,12 @@
 import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
+import { useSelector } from "react-redux";
+import { logsSelector, resultsSelector } from "../store/selectors/logSelectors";
+import { Log } from "../store/redusers/logsReducer";
 
 export const Dashboard = () => {
+  const logs = useSelector(logsSelector);
+  const res = useSelector(resultsSelector);
   return (
     <body>
       <Sidebar />
@@ -16,11 +21,17 @@ export const Dashboard = () => {
             </div>
             <div className="table-section">
               <h1 className="section-title">SQL Metrics</h1>
-              <p className="section-text">Query count: 24</p>
-              <p className="section-text">Results count: 230</p>
-              <p className="section-text"># SELECT: 24</p>
-              <p className="section-text"># SELECT WHERE: 0</p>
-              <p className="section-text"># SELECT LEFT JOIN: 0</p>
+              <p className="section-text">Query count: {logs.queryCount}</p>
+              <p className="section-text">Results count: {res}</p>
+              <p className="section-text">
+                # SELECT: {logs.metricsCount.select}
+              </p>
+              <p className="section-text">
+                # SELECT WHERE: {logs.metricsCount.where}
+              </p>
+              <p className="section-text">
+                # SELECT LEFT JOIN: {logs.metricsCount.leftJoin}
+              </p>
             </div>
           </div>
           <div className="activity-section">
@@ -29,14 +40,14 @@ export const Dashboard = () => {
               Explore the app and see metrics here
             </p>
             <div className="log-section">
-              <p className="log-time">
-                2023-01-30T10:14:37.248Z,
-                primary-cf5c58b0-e2c3-46e2-b128-37eecde77a08.db3,
-                1.3082480020821095ms
-              </p>
-              <p className="select-count">
-                SELECT COUNT(1) as total FROM Supplier
-              </p>
+              {logs.logs.map((log: Log, i) => (
+                <div>
+                  <p className="log-time">
+                    {log.date}, {log.requestTime}
+                  </p>
+                  <p className="select-count">{log.sql}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

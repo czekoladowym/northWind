@@ -1,11 +1,4 @@
-import "./styles/Sidebar.css";
-import "./styles/Header.css";
-import "./styles/Home.css";
-import "./styles/Dashboard.css";
-import "./styles/Suppliers.css";
-import "./styles/Search.css";
-import "./styles/Order.css";
-import "./styles/Pagination.css";
+import "./styles/imports.css";
 import Routes from "./routes/Routes";
 
 function App() {

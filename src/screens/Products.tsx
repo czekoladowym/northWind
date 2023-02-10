@@ -2,12 +2,12 @@ import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
 import { useState, useEffect } from "react";
 import axios, { Axios, AxiosResponse } from "axios";
-import { Pagination } from "../components/Pagination";
+import Pagination from "../components/pagination/pagination";
+import { useDispatch } from "react-redux/es/exports";
+import { addLogAction } from "../store/actions/logActions";
 
 type Product = {
-  // CHANGE GAVNO
   id: string;
-  // ----------------
   name: string;
   qtPerUnit: string;
   price: string;
@@ -30,6 +30,7 @@ export const Products = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [contentPerPage] = useState<number>(20);
+  const dispatch = useDispatch();
   useEffect(() => {
     setLoading(true);
     const getContent = async () => {
@@ -37,6 +38,7 @@ export const Products = () => {
         "https://nortwind-backend-rodkin.onrender.com/products"
       );
       setContent(res.data.content);
+      dispatch(addLogAction(res.data.logs));
       setLoading(false);
     };
 
@@ -82,8 +84,8 @@ export const Products = () => {
             <th></th>
           </thead>
           <tbody>
-            {currentContent.map((product, id) => (
-              <tr key={id}>
+            {currentContent.map((product) => (
+              <tr key={product.id}>
                 <td className="row-item">
                   <a href="#" className="blue-id">
                     {product.name}
@@ -98,9 +100,9 @@ export const Products = () => {
           </tbody>
         </table>
         <Pagination
-          contentPerPage={contentPerPage}
-          totalContent={content.length}
-          paginate={paginate}
+          activePage={currentPage}
+          pagesNumber={content.length / contentPerPage}
+          onChangePage={paginate}
         />
       </main>
     </div>

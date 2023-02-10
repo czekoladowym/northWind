@@ -2,6 +2,8 @@ import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
 import { useState, useEffect, useCallback } from "react";
 import axios, { AxiosResponse } from "axios";
+import { useDispatch } from "react-redux/es/exports";
+import { addLogAction } from "../store/actions/logActions";
 
 type Customer = {
   customerID: string;
@@ -14,6 +16,7 @@ type Customer = {
   phone: string;
 };
 type Product = {
+  id: string;
   name: string;
   qtPerUnit: string;
   price: string;
@@ -36,6 +39,7 @@ const Search = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [seacrhValue, setSeacrhValue] = useState<string>("");
   const [table, setTable] = useState<string>("products");
+  const dispatch = useDispatch();
 
   const getContent = useCallback(async () => {
     if (!seacrhValue) {
@@ -45,9 +49,11 @@ const Search = () => {
       `https://nortwind-backend-rodkin.onrender.com/search/${seacrhValue}`,
       { tableForSearch: table }
     );
+
     table == "customers"
       ? setCustomers(res.data.content)
       : setProducts(res.data.content);
+    dispatch(addLogAction(res.data.logs));
   }, [table, setCustomers, setProducts, seacrhValue]);
 
   useEffect(() => {
@@ -112,7 +118,7 @@ const Search = () => {
               <section>
                 {table == "products"
                   ? products.map((product, i) => (
-                      <div className="product-section" key={i}>
+                      <div className="product-section" key={product.id}>
                         <a href="#" className="search-link">
                           {product.name}
                         </a>

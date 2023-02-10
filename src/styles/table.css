@@ -9,6 +9,8 @@
   flex-direction: row;
 }
 .page-title {
+  display: flex;
+  align-items: center;
   margin: 0;
   padding: 12px 16px;
   font-size: 16px;
@@ -23,18 +25,43 @@
   height: 48px;
   width: 56px;
 }
+.suppliers-table,
+.products-table,
+.employees-table,
+.customers-table,
 .orders-table {
   text-align: left;
   width: 100%;
   border-collapse: collapse;
   text-indent: 0;
 }
+.suppliers,
+.products,
+.employees,
+.customers,
 .orders {
   display: table-row;
   margin: 0;
   width: 100%;
   background-color: #fff;
 }
+.avatar-icons-column {
+  height: 40px;
+  width: 48px;
+}
+.rounded-full {
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  z-index: -1;
+}
+.image-column {
+  position: absolute;
+  padding: 8px 12px;
+}
+.link-company,
+.link-name,
+.link-employees,
 .blue-id {
   text-decoration: none;
   width: 100%;
@@ -45,6 +72,23 @@
 .row-item {
   padding: 8px 12px;
 }
-tr:nth-child(even) {
+.loading {
+  line-height: 24px;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 24px;
+}
+.white-row {
   background-color: #fff;
+}
+.gray-row {
+  background-color: #2563eb;
+}
+.blue-id {
+  text-decoration: none;
+  width: 100%;
+  padding: 0;
+  line-height: 24px;
+  color: #2563eb;
 }

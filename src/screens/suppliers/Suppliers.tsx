@@ -1,15 +1,18 @@
-import { Sidebar } from "../components/Sidebar";
-import { Header } from "../components/Header";
+import { Sidebar } from "../../components/Sidebar";
+import { Header } from "../../components/Header";
 import { useState, useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
-import { Pagination } from "../components/Pagination";
+import Pagination from "../../components/pagination/pagination";
+import { useDispatch } from "react-redux/es/exports";
+import { addLogAction, addResultAction } from "../../store/actions/logActions";
+import { Link } from "react-router-dom";
 
-type Employee = {
+type Supplier = {
   id: string;
-  name: string;
+  company: string;
+  contact: string;
   title: string;
   city: string;
-  phone: string;
   country: string;
 };
 type Logs = {
@@ -17,36 +20,41 @@ type Logs = {
   date: string;
   requestTime: string;
 };
-
 type Response = {
-  content: Employee[];
+  content: Supplier[];
   logs: Logs;
 };
 
-export const Employees = () => {
-  const [content, setContent] = useState<Employee[]>([]);
+const Suppliers = () => {
+  const [content, setContent] = useState<Supplier[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [contentPerPage] = useState<number>(20);
+  const dispatch = useDispatch();
   useEffect(() => {
-    setLoading(true);
     const getContent = async () => {
+      setLoading(true);
       const res: AxiosResponse<Response> = await axios.get(
-        "https://nortwind-backend-rodkin.onrender.com/employees"
+        "https://nortwind-backend-rodkin.onrender.com/suppliers"
       );
       setContent(res.data.content);
+      dispatch(addLogAction(res.data.logs));
+      dispatch(addResultAction(res.data.content.length));
       setLoading(false);
     };
+
     getContent();
   }, []);
-
   function abbreviateName(name: string) {
-    return name
-      .split(" ")
-      .map((part) => part[0].toUpperCase())
-      .join("-");
+    const nameSplitted = name.trimEnd().split(" ");
+    const nameRes = nameSplitted[0].concat(
+      "-",
+      nameSplitted[nameSplitted.length - 1]
+    );
+    return nameRes;
   }
 
+  // change page
   const paginate = (pageNum: number) => setCurrentPage(pageNum);
 
   // get current content
@@ -60,7 +68,7 @@ export const Employees = () => {
         <Sidebar />
         <Header />
         <main className="main-section">
-          <h1 className="loading">Loading orders...</h1>
+          <h1 className="loading">Loading suppliers...</h1>
         </main>
       </div>
     );
@@ -71,52 +79,52 @@ export const Employees = () => {
       <Header />
       <main className="main-section">
         <div className="section-header">
-          <h1 className="page-title">Employees</h1>
+          <h1 className="page-title">Suppliers</h1>
           <a className="section-header-icon">
             <span className="material-icons dark-icon">redo</span>
           </a>
         </div>
-        <table className="employees-table">
-          <thead className="employees">
+        <table className="suppliers-table">
+          <header className="suppliers">
             <th className="avatar-icons-column"></th>
-            <th>Name</th>
+            <th>Company</th>
+            <th>Contact</th>
             <th>Title</th>
             <th>City</th>
-            <th>Phone</th>
             <th>Country</th>
             <th></th>
-          </thead>
+          </header>
           <tbody>
-            {currentContent.map((employee, i) => (
-              // ENTER ID
-              <tr>
-                <td className="image-colomn">
+            {currentContent.map((supplier, i) => (
+              <tr key={supplier.id}>
+                <td className="image-column">
                   <img
                     src={`https://avatars.dicebear.com/v2/initials/${abbreviateName(
-                      employee.name
+                      supplier.contact
                     )}.svg`}
                     className="rounded-full"
                   />
                 </td>
                 <td className="row-item">
-                  <a className="link-employees" href="#">
-                    {employee.name}
-                  </a>
+                  <Link className="link-company" to={`${supplier.id}`}>
+                    {supplier.company}
+                  </Link>
                 </td>
-                <td className="row-item">{employee.title}</td>
-                <td className="row-item">{employee.city}</td>
-                <td className="row-item">{employee.phone}</td>
-                <td className="row-item">{employee.country}</td>
+                <td className="row-item">{supplier.contact}</td>
+                <td className="row-item">{supplier.title}</td>
+                <td className="row-item">{supplier.city}</td>
+                <td className="row-item">{supplier.country}</td>
               </tr>
             ))}
           </tbody>
         </table>
         <Pagination
-          contentPerPage={contentPerPage}
-          totalContent={content.length}
-          paginate={paginate}
+          activePage={currentPage}
+          pagesNumber={content.length / contentPerPage}
+          onChangePage={paginate}
         />
       </main>
     </div>
   );
 };
+export default Suppliers;

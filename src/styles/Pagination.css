@@ -17,7 +17,7 @@
   cursor: pointer;
   text-align: center;
 }
-.active-btn {
+.active-page {
   border: 1px solid rgb(209 213 219);
 }
 .paginate-link {

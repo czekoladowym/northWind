@@ -1,8 +1,11 @@
-import { Sidebar } from "../components/Sidebar";
-import { Header } from "../components/Header";
+import { Sidebar } from "../../components/Sidebar";
+import { Header } from "../../components/Header";
 import { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
-import { Pagination } from "../components/Pagination";
+import Pagination from "../../components/pagination/pagination";
+import { useDispatch } from "react-redux/es/exports";
+import { addLogAction } from "../../store/actions/logActions";
+import { Link } from "react-router-dom";
 
 type Order = {
   id: string;
@@ -30,6 +33,7 @@ export const Orders = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [contentPerPage] = useState<number>(20);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setLoading(true);
@@ -38,6 +42,7 @@ export const Orders = () => {
         "https://nortwind-backend-rodkin.onrender.com/orders"
       );
       setContent(res.data.content);
+      dispatch(addLogAction(res.data.logs));
       setLoading(false);
     };
     getContent();
@@ -88,9 +93,9 @@ export const Orders = () => {
             {currentContent.map((order, i) => (
               <tr key={order.id}>
                 <td className="row-item">
-                  <a href="#" className="blue-id">
+                  <Link to={`${order.id}`} className="blue-id">
                     {order.id}
-                  </a>
+                  </Link>
                 </td>
                 <td className="row-item">{"$" + order.price}</td>
                 <td className="row-item">{order.products}</td>
@@ -104,9 +109,9 @@ export const Orders = () => {
           </tbody>
         </table>
         <Pagination
-          contentPerPage={contentPerPage}
-          totalContent={content.length}
-          paginate={paginate}
+          activePage={currentPage}
+          pagesNumber={content.length / contentPerPage}
+          onChangePage={paginate}
         />
       </main>
     </div>

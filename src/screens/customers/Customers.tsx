@@ -1,19 +1,26 @@
-import { Sidebar } from "../components/Sidebar";
-import { Header } from "../components/Header";
+import { Sidebar } from "../../components/Sidebar";
+import { Header } from "../../components/Header";
 import { useState, useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
-import { Pagination } from "../components/Pagination";
+import Pagination from "../../components/pagination/pagination";
+import { useDispatch } from "react-redux/es/exports";
+import { addLogAction, addResultAction } from "../../store/actions/logActions";
+import { Link } from "react-router-dom";
 
-type Customer = {
+export type Customer = {
   customerID: string;
   companyName: string;
   contactName: string;
   contactTitle: string;
   city: string;
+  postalCode: string;
+  region: null;
   country: string;
   address: string;
+  phone: string;
+  fax: string;
 };
-type Logs = {
+export type Logs = {
   sql: string;
   date: string;
   requestTime: string;
@@ -24,11 +31,12 @@ type Response = {
   logs: Logs;
 };
 
-export const Customers = () => {
+const Customers = () => {
   const [content, setContent] = useState<Customer[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [contentPerPage] = useState<number>(20);
+  const dispatch = useDispatch();
   useEffect(() => {
     setLoading(true);
     const getContent = async () => {
@@ -36,6 +44,8 @@ export const Customers = () => {
         "https://nortwind-backend-rodkin.onrender.com/customers"
       );
       setContent(res.data.content);
+      dispatch(addLogAction(res.data.logs));
+      dispatch(addResultAction(res.data.content.length));
       setLoading(false);
     };
     getContent();
@@ -66,7 +76,6 @@ export const Customers = () => {
       "-",
       nameSplitted[nameSplitted.length - 1]
     );
-
     return nameRes;
   }
   return (
@@ -93,7 +102,7 @@ export const Customers = () => {
           <tbody>
             {currentContent.map((customer, i) => (
               <tr key={customer.customerID}>
-                <td className="image-colomn">
+                <td className="image-column">
                   <img
                     src={`https://avatars.dicebear.com/v2/initials/${abbreviateName(
                       customer.contactName
@@ -102,9 +111,12 @@ export const Customers = () => {
                   />
                 </td>
                 <td className="row-item">
-                  <a className="link-company" href="#">
+                  <Link
+                    className="link-company"
+                    to={`/customers/${customer.customerID}`}
+                  >
                     {customer.companyName}
-                  </a>
+                  </Link>
                 </td>
                 <td className="row-item">{customer.contactName}</td>
                 <td className="row-item">{customer.contactTitle}</td>
@@ -115,11 +127,12 @@ export const Customers = () => {
           </tbody>
         </table>
         <Pagination
-          contentPerPage={contentPerPage}
-          totalContent={content.length}
-          paginate={paginate}
+          activePage={currentPage}
+          pagesNumber={content.length / contentPerPage}
+          onChangePage={paginate}
         />
       </main>
     </div>
   );
 };
+export default Customers;

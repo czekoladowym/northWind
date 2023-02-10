@@ -1,0 +1,53 @@
+.id-icons {
+  margin-right: 8px;
+}
+.id-field-content {
+  margin: 0 0 12px;
+}
+.id-header {
+  line-height: 24px;
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.id-card-content {
+  display: flex;
+  gap: 16px;
+}
+.id-desc {
+  line-height: 24px;
+}
+.id-field-card {
+  width: 100%;
+}
+.back-btn {
+  font-size: 16px;
+  padding: 8px 16px;
+  background-color: #ef4444;
+  border: none;
+  border-radius: 4px;
+  color: rgb(255 255 255);
+  font-family: system-ui, Arial, sans-serif;
+  line-height: 24px;
+  border: 1px solid #ef4444;
+}
+.id-main-card {
+  background-color: #fff;
+  padding: 24px;
+}
+.card-content-hr {
+  margin: 24px -24px;
+  color: inherit;
+  border: none;
+  height: 0;
+  border: 0.5px solid #e5e7eb;
+}
+.without-margin {
+  margin: 0;
+}
+.card-title {
+  padding: 12px 0;
+}
+.card-table {
+  width: 100%;
+}
