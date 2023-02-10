@@ -26,7 +26,7 @@ type Response = {
   logs: Logs;
 };
 
-export const Employees = () => {
+const Employees = () => {
   const [content, setContent] = useState<Employee[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -128,3 +128,4 @@ export const Employees = () => {
     </div>
   );
 };
+export default Employees;

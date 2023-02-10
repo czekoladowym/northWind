@@ -1,10 +1,11 @@
-import { Sidebar } from "../components/Sidebar";
-import { Header } from "../components/Header";
+import { Sidebar } from "../../components/Sidebar";
+import { Header } from "../../components/Header";
 import { useState, useEffect } from "react";
 import axios, { Axios, AxiosResponse } from "axios";
-import Pagination from "../components/pagination/pagination";
+import Pagination from "../../components/pagination/pagination";
 import { useDispatch } from "react-redux/es/exports";
-import { addLogAction } from "../store/actions/logActions";
+import { addLogAction } from "../../store/actions/logActions";
+import { Link } from "react-router-dom";
 
 type Product = {
   id: string;
@@ -25,7 +26,7 @@ type Response = {
   logs: Logs;
 };
 
-export const Products = () => {
+const Products = () => {
   const [content, setContent] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -87,9 +88,9 @@ export const Products = () => {
             {currentContent.map((product) => (
               <tr key={product.id}>
                 <td className="row-item">
-                  <a href="#" className="blue-id">
+                  <Link to={`/products/${product.id}`} className="blue-id">
                     {product.name}
-                  </a>
+                  </Link>
                 </td>
                 <td className="row-item">{product.qtPerUnit}</td>
                 <td className="row-item">{"$" + product.price}</td>
@@ -108,3 +109,4 @@ export const Products = () => {
     </div>
   );
 };
+export default Products;

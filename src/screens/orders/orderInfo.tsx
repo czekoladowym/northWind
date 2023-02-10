@@ -152,17 +152,42 @@ const OrderInfo = () => {
               </div>
             </div>
           </div>
-          <hr className="card-content-hr" />
+        </div>
+        <div className="card-table">
+          <header>
+            <h1 className="page-title card-title">Products in Order</h1>
+          </header>
+          <table className="orders-table">
+            <thead className="ordersInfo">
+              <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Order Price</th>
+                <th>Total Price</th>
+                <th>Discount</th>
+              </tr>
+            </thead>
+            <tbody>
+              {order?.productsInOrder.map((product) => (
+                <tr>
+                  <td className="row-item">
+                    <Link className="blue-id" to={`/products`}>
+                      {product.product}
+                    </Link>
+                  </td>
+                  <td className="row-item">{product.quantity}</td>
+                  <td className="row-item">{product.orderPrice}</td>
+                  <td className="row-item">{product.totalPrice}</td>
+                  <td className="row-item">{product.discount}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="card-bottom-section">
           <button className="back-btn" onClick={() => history.back()}>
             Go back
           </button>
-        </div>
-        <div className="card-table">
-          <table>
-            <header>
-              <h1 className="page-title card-title">Products in Order</h1>
-            </header>
-          </table>
         </div>
       </main>
     </div>

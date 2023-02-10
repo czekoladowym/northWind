@@ -28,7 +28,7 @@ type Response = {
   logs: Logs;
 };
 
-export const Orders = () => {
+const Orders = () => {
   const [content, setContent] = useState<Order[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -117,3 +117,4 @@ export const Orders = () => {
     </div>
   );
 };
+export default Orders;

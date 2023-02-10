@@ -1,12 +1,38 @@
 import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logsSelector, resultsSelector } from "../store/selectors/logSelectors";
 import { Log } from "../store/redusers/logsReducer";
+import axios, { AxiosResponse } from "axios";
+import { useState, useEffect } from "react";
+import { addLogAction, addResultAction } from "../store/actions/logActions";
 
-export const Dashboard = () => {
+interface getUserInfo {
+  ipAddress: string;
+  continentCode: string;
+  continentName: string;
+  countryCode: string;
+  countryName: string;
+  stateProv: string;
+  city: string;
+}
+
+const Dashboard = () => {
   const logs = useSelector(logsSelector);
   const res = useSelector(resultsSelector);
+  const [apiRes, setApiRes] = useState<getUserInfo>();
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const getContent = async () => {
+      const res: AxiosResponse<getUserInfo> = await axios.get(
+        "https://api.db-ip.com/v2/free/self"
+      );
+      setApiRes(res.data);
+    };
+
+    getContent();
+  }, []);
   return (
     <body>
       <Sidebar />
@@ -16,8 +42,8 @@ export const Dashboard = () => {
           <div className="main-table">
             <div className="table-section">
               <h1 className="section-title">Worker</h1>
-              <p className="section-text">Colo: DUS</p>
-              <p className="section-text">Country: DE</p>
+              <p className="section-text">Colo: {apiRes?.continentCode}</p>
+              <p className="section-text">Country: {apiRes?.countryCode}</p>
             </div>
             <div className="table-section">
               <h1 className="section-title">SQL Metrics</h1>
@@ -55,3 +81,4 @@ export const Dashboard = () => {
     </body>
   );
 };
+export default Dashboard;

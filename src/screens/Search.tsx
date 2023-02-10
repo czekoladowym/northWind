@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import axios, { AxiosResponse } from "axios";
 import { useDispatch } from "react-redux/es/exports";
 import { addLogAction } from "../store/actions/logActions";
+import { Link } from "react-router-dom";
 
 type Customer = {
   customerID: string;
@@ -119,9 +120,12 @@ const Search = () => {
                 {table == "products"
                   ? products.map((product, i) => (
                       <div className="product-section" key={product.id}>
-                        <a href="#" className="search-link">
+                        <Link
+                          to={`/products/${product.id}`}
+                          className="search-link"
+                        >
                           {product.name}
-                        </a>
+                        </Link>
                         <p className="search-info">
                           {"#" + (products.indexOf(product) + 1)}, Quantity Per
                           Unit: {product.qtPerUnit}, Price: {product.price},
@@ -134,7 +138,12 @@ const Search = () => {
                         className="product-section"
                         key={customer.customerID}
                       >
-                        <a className="search-link">{customer.companyName}</a>
+                        <Link
+                          to={`/customers/${customer.customerID}`}
+                          className="search-link"
+                        >
+                          {customer.companyName}
+                        </Link>
                         <p className="search-info">
                           {"#" + (customers.indexOf(customer) + 1)}, Contact:{" "}
                           {customer.contactName}, Title: {customer.contactTitle}

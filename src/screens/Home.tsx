@@ -1,7 +1,7 @@
 import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
 
-export const Home = () => {
+const Home = () => {
   return (
     <div>
       <Sidebar />
@@ -61,3 +61,4 @@ export const Home = () => {
     </div>
   );
 };
+export default Home;

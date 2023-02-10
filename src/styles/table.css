@@ -45,6 +45,13 @@
   width: 100%;
   background-color: #fff;
 }
+
+.ordersInfo {
+  margin: 0;
+  width: 100%;
+  background-color: #fff;
+}
+
 .avatar-icons-column {
   height: 40px;
   width: 48px;

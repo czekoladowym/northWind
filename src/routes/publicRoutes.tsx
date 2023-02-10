@@ -1,15 +1,16 @@
-import { Home } from "../screens/Home";
-import { Dashboard } from "../screens/Dashboard";
+import Home from "../screens/Home";
+import Dashboard from "../screens/Dashboard";
 import Suppliers from "../screens/suppliers/Suppliers";
-import { Products } from "../screens/Products";
-import { Orders } from "../screens/orders/Orders";
-import { Employees } from "../screens/employees/Employees";
+import Products from "../screens/products/Products";
+import Orders from "../screens/orders/Orders";
+import Employees from "../screens/employees/Employees";
 import Search from "../screens/Search";
 import CustomerInfo from "../screens/customers/CustomerInfo";
 import Customers from "../screens/customers/Customers";
 import EmployeeInfo from "../screens/employees/employeeInfo";
 import SuppliersInfo from "../screens/suppliers/suppliersInfo";
 import OrderInfo from "../screens/orders/orderInfo";
+import ProductsInfo from "../screens/products/productsInfo";
 
 export const publicRoutes = [
   {
@@ -59,6 +60,10 @@ export const publicRoutes = [
   {
     path: `/orders/:id`,
     element: <OrderInfo />,
+  },
+  {
+    path: `/products/:id`,
+    element: <ProductsInfo />,
   },
 ];
 export default publicRoutes;

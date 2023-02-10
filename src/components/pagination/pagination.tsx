@@ -9,12 +9,11 @@ const Pagination = ({
   onChangePage,
 }: PaginationProps) => {
   const mapPages = (pagesNumber: number, activePage: number) => {
-    const getBtnClass = (page: number) => {
-      return "paginate-item " + (activePage == page) ? "active-page" : "";
-    };
     const start = (
       <button
-        className={getBtnClass(1)}
+        className={
+          activePage === 1 ? "active-page paginate-item" : "paginate-item"
+        }
         onClick={() => onChangePage(1)}
         key={1}
       >
@@ -23,7 +22,11 @@ const Pagination = ({
     );
     const end = (
       <button
-        className={getBtnClass(pagesNumber)}
+        className={
+          activePage === pagesNumber
+            ? "active-page paginate-item"
+            : "paginate-item"
+        }
         onClick={() => onChangePage(pagesNumber)}
         key={pagesNumber}
       >
@@ -39,7 +42,9 @@ const Pagination = ({
       if (i < pagesNumber) {
         middle.push(
           <button
-            className={getBtnClass(i)}
+            className={
+              activePage === i ? "active-page paginate-item" : "paginate-item"
+            }
             onClick={() => onChangePage(i)}
             key={i}
           >
