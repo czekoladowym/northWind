@@ -2,6 +2,9 @@
   padding: 12px 24px;
   background-color: #fff;
   border: 1px solid rgb(243 244 246);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .pagination-list {
   display: flex;
@@ -28,5 +31,9 @@
   border: 1px solid rgb(209 213 219);
 }
 .paginate-item:hover {
-  border: rgb(107 114 128);
+  border: 1px solid rgb(107 114 128);
+}
+.page-mark {
+  font-family: system-ui, Arial, sans-serif;
+  font-size: 80%;
 }

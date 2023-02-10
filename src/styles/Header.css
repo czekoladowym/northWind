@@ -26,6 +26,7 @@
   background-color: #fff;
   font-size: 16px;
   justify-content: center;
+  cursor: pointer;
 }
 .setOpen {
   color: blueviolet;

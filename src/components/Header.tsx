@@ -27,7 +27,7 @@ export const Header = () => {
           <a
             href="https://blog.cloudflare.com/introducing-d1/"
             id="dropdownLinks"
-            className="menu-link"
+            className="menu-link-drop"
           >
             <span className="material-icons">link</span>
             <p className="sql-item">Introducing D1</p>
@@ -35,7 +35,7 @@ export const Header = () => {
           <a
             href="https://www.sqlite.org/lang.html"
             id="dropdownLinks"
-            className="menu-link"
+            className="menu-link-drop"
           >
             <span className="material-icons">link</span>
             <p className="sql-item">SQLite SQL Flavour</p>
@@ -43,7 +43,7 @@ export const Header = () => {
           <a
             href="https://developers.cloudflare.com/workers/learning/using-durable-objects/"
             id="dropdownLinks"
-            className="menu-link"
+            className="menu-link-drop"
           >
             <span className="material-icons">link</span>
             <p className="sql-item"> Durable Objects</p>

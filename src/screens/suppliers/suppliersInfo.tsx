@@ -111,6 +111,10 @@ const SuppliersInfo = () => {
                 <h1 className="id-header">Phone</h1>
                 <a className="id-desc">{supplier?.phone}</a>
               </div>
+              <div className="id-field-content without-margin">
+                <h1 className="id-header">Home Page</h1>
+                <a className="id-desc">{supplier?.homePage}</a>
+              </div>
             </div>
           </div>
           <hr className="card-content-hr" />

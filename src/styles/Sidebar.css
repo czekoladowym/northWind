@@ -33,7 +33,8 @@
   display: flex;
   flex-direction: column;
 }
-.menu-link {
+.menu-link,
+.menu-link-drop {
   text-decoration: none;
   color: #d1d5db;
   display: flex;
