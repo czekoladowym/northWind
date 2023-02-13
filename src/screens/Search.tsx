@@ -151,6 +151,10 @@ const Search = () => {
                         </p>
                       </div>
                     ))}
+                {((table == "products" && products.length == 0) ||
+                  (table == "customers" && customers.length == 0)) && (
+                  <p className="empty-search">No results</p>
+                )}
               </section>
             </div>
           </div>

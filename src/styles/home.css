@@ -39,4 +39,5 @@
 }
 .northwind-desc-block {
   display: flex;
+  justify-content: space-between;
 }

@@ -4,7 +4,9 @@ import { Header } from "../components/Header";
 const Home = () => {
   return (
     <div>
-      <Sidebar />
+      <aside className="sidebar-menu">
+        <Sidebar />
+      </aside>
       <Header />
       <main className="main-home-section">
         <div className="card-content">
