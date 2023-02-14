@@ -75,12 +75,12 @@ const Pagination = ({
     <div className="pagination-block">
       {pagesNumber > 1 && (
         <div className="pagination-list">
-          {mapPages(Math.ceil(pagesNumber), activePage)}
+          {mapPages(pagesNumber, activePage)}
         </div>
       )}
 
       <span className="page-mark">
-        Page {activePage} of {Math.ceil(pagesNumber)}
+        Page {activePage} of {pagesNumber}
       </span>
     </div>
   );

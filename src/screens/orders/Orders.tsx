@@ -24,6 +24,7 @@ type Logs = {
 };
 
 type Response = {
+  pages: number;
   content: Order[];
   logs: Logs;
 };
@@ -32,28 +33,31 @@ const Orders = () => {
   const [content, setContent] = useState<Order[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [contentPerPage] = useState<number>(20);
+  const [pageCount, setPageCount] = useState<number>(0);
   const dispatch = useDispatch();
 
   useEffect(() => {
     setLoading(true);
     const getContent = async () => {
       const res: AxiosResponse<Response> = await axios.get(
-        "https://nortwind-backend-rodkin.onrender.com/orders"
+        `https://nortwind-backend-rodkin.onrender.com/orders`,
+        {
+          params: {
+            page: currentPage,
+          },
+        }
       );
       setContent(res.data.content);
+      setPageCount(res.data.pages);
       dispatch(addLogAction(res.data.logs));
       setLoading(false);
     };
     getContent();
-  }, []);
+  }, [currentPage]);
 
-  const paginate = (pageNum: number) => setCurrentPage(pageNum);
-
-  // get current content
-  const indexOfLastContent = currentPage * contentPerPage;
-  const indexOfFirstContent = indexOfLastContent - contentPerPage;
-  const currentContent = content.slice(indexOfFirstContent, indexOfLastContent);
+  const paginate = (page: number) => {
+    setCurrentPage(page);
+  };
 
   if (loading) {
     return (
@@ -90,7 +94,7 @@ const Orders = () => {
             <th></th>
           </thead>
           <tbody>
-            {currentContent.map((order, i) => (
+            {content.map((order, i) => (
               <tr key={order.id}>
                 <td className="row-item">
                   <Link to={`${order.id}`} className="blue-id">
@@ -110,7 +114,7 @@ const Orders = () => {
         </table>
         <Pagination
           activePage={currentPage}
-          pagesNumber={content.length / contentPerPage}
+          pagesNumber={pageCount}
           onChangePage={paginate}
         />
       </main>

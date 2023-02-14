@@ -4,7 +4,6 @@ html {
 *,
 *:after,
 *:before {
-  /* border: 0 solid #e5e7eb; */
   box-sizing: inherit;
 }
 body {
@@ -12,6 +11,8 @@ body {
   font-family: system-ui, Arial, sans-serif;
   background-color: rgb(249 250 251);
   height: 100vh;
+  overflow-x: hidden;
+  position: relative;
 }
 ul {
   list-style: none;

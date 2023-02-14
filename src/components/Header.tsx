@@ -9,8 +9,35 @@ export const Header = () => {
     }, 1000);
     return () => clearInterval(interval);
   }, []);
+
+  let menuToggle = document.querySelectorAll(".sidebar");
+  let contentToggle = document.querySelectorAll(".main-section");
+  let headerToggle = document.querySelectorAll(".header");
+
+  const sideBarToggle = (event: any) => {
+    event.preventDefault();
+    Array.from(menuToggle).map((menu: any) => {
+      menu.classList.toggle("sidebar-active");
+    });
+    Array.from(contentToggle).map((content: any) => {
+      content.classList.toggle("main-section-active");
+    });
+    Array.from(headerToggle).map((header: any) => {
+      header.classList.toggle("main-section-active");
+    });
+  };
+
   return (
     <div className="header">
+      <a
+        href="#"
+        className="menu-btn"
+        onClick={(e) => {
+          sideBarToggle(e);
+        }}
+      >
+        <span className="material-icons">menu</span>
+      </a>
       <div id="clock">{time}</div>
 
       <div
@@ -50,6 +77,9 @@ export const Header = () => {
           </a>
         </ul>
       )}
+      <a className="header-dots">
+        <span className="icon material-icons">more_vert</span>
+      </a>
     </div>
   );
 };

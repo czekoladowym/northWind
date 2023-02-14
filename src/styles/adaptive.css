@@ -1,0 +1,98 @@
+/* ADAPTIVE */
+.menu-btn {
+  display: none;
+}
+.header-dots {
+  display: none;
+}
+.img {
+  width: 24rem;
+}
+
+@media (max-width: 1024px) {
+  html {
+    margin: 0;
+    font-family: system-ui, Arial, sans-serif;
+    background-color: rgb(249 250 251);
+    height: 100vh;
+    overflow: hidden;
+    overflow-x: hidden;
+    position: relative;
+  }
+  .menu-btn {
+    text-decoration: none;
+    display: flex;
+    padding: 8px 12px;
+    height: 56px;
+    width: 48px;
+    align-items: center;
+    justify-content: center;
+  }
+  #clock {
+    display: none;
+  }
+  .header-dots {
+    display: block;
+    text-decoration: none;
+    display: flex;
+    padding: 8px 12px;
+    height: 56px;
+    width: 48px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 99;
+    width: 15rem;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    transition: 0.5s;
+    transform: translateX(-100%);
+  }
+  #dropdownLinks {
+    display: none;
+  }
+  .header {
+    margin-left: 0;
+  }
+  .main-section,
+  .main-home-section {
+    padding: 24px 24px 24px 24px;
+    width: 100%;
+    height: auto;
+  }
+  .main-section-active {
+    transform: translateX(15rem);
+  }
+  .sidebar-active {
+    transform: translateX(0%);
+    height: 100vh;
+    position: fixed;
+    width: 240px;
+    background-color: rgb(31 41 55);
+    display: flex;
+    justify-content: flex-start;
+    transition-duration: 0.15s;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 40;
+  }
+  /* TABLES */
+  .suppliers-table,
+  .products-table,
+  .employees-table,
+  .customers-table,
+  .orders-table {
+    background-color: #fff;
+  }
+  /* .avatar-icons-column {
+    display: none;
+  } */
+}
