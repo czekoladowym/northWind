@@ -32,7 +32,7 @@ type Logs = {
 
 type Response = {
   content: [];
-  logs: Logs;
+  logs: Logs[];
 };
 
 const Search = () => {
