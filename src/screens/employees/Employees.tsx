@@ -67,7 +67,7 @@ const Employees = () => {
         <Sidebar />
         <Header />
         <main className="main-section">
-          <h1 className="loading">Loading orders...</h1>
+          <h1 className="loading">Loading employees...</h1>
         </main>
       </div>
     );
