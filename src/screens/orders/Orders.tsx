@@ -63,13 +63,13 @@ const Orders = () => {
 
   if (loading == true) {
     return (
-      <body>
+      <div>
         <Sidebar />
         <Header />
         <main className="main-section">
           <h1 className="loading">Loading orders...</h1>
         </main>
-      </body>
+      </div>
     );
   }
   return (

@@ -34,7 +34,7 @@ const Dashboard = () => {
     getContent();
   }, []);
   return (
-    <body>
+    <div>
       <Sidebar />
       <Header />
       <main className="main-home-section">
@@ -78,7 +78,7 @@ const Dashboard = () => {
           </div>
         </div>
       </main>
-    </body>
+    </div>
   );
 };
 export default Dashboard;
