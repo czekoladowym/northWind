@@ -105,11 +105,13 @@ const ProductsInfo = () => {
               </div>
               <div className="id-field-content">
                 <h1 className="id-header">Reorder Level</h1>
-                <p className="id-desc">{product?.reorderLevel}</p>
+                <p className="id-desc">
+                  {product?.reorderLevel ? product?.reorderLevel : "-"}
+                </p>
               </div>
               <div className="id-field-content without-margin">
                 <h1 className="id-header">Discontinued</h1>
-                {product?.discontinued}
+                {product?.discontinued ? product?.discontinued : "-"}
               </div>
             </div>
           </div>

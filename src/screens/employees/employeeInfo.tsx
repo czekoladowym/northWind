@@ -129,8 +129,11 @@ const EmployeeInfo = () => {
               </div>
               <div className="id-field-content without-margin">
                 <h1 className="id-header">Reports To</h1>
-                <Link className="id-desc link-employees" to={``}>
-                  {employees?.reportsToName}
+                <Link
+                  className="id-desc link-employees"
+                  to={`/employee/${employees?.reportsTo}`}
+                >
+                  {employees?.reportsToName ? employees?.reportsToName : "-"}
                 </Link>
               </div>
             </div>

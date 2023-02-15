@@ -141,7 +141,7 @@ const OrderInfo = () => {
               </div>
               <div className="id-field-content">
                 <h1 className="id-header">Ship Region</h1>
-                <a className="id-desc">-</a>
+                <a className="id-desc">{order?.region ? order?.region : "-"}</a>
               </div>
               <div className="id-field-content">
                 <h1 className="id-header">Ship Postal Code</h1>

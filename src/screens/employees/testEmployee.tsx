@@ -7,27 +7,33 @@ import { Link, useParams } from "react-router-dom";
 import { addLogAction, addResultAction } from "../../store/actions/logActions";
 import { Logs } from "../customers/Customers";
 
-type Supplier = {
-  supplierID: string;
-  companyName: string;
-  contactName: string;
-  contactTitle: string;
+type Employee = {
+  id: string;
+  name: string;
+  firstName: string;
+  lastName: string;
+  title: string;
+  titleOfCourtesy: string;
+  birthDate: string;
+  hireDate: string;
   address: string;
   city: string;
-  region: null | string;
   postalCode: string;
   country: string;
+  homePhone: string;
+  extension: string;
   phone: string;
-  fax: null | string;
-  homePage: null | string;
+  notes: string;
+  reportsTo: string;
+  reportsToName: string;
 };
 type iDRes = {
-  content: Supplier[];
+  content: Employee[];
   logs: Logs[];
 };
 
-const SuppliersInfo = () => {
-  const [supplier, setSupplier] = useState<Supplier | undefined>();
+const TestEmployees = () => {
+  const [employees, setEmployees] = useState<Employee | undefined>();
   const { id } = useParams();
   const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
@@ -35,11 +41,11 @@ const SuppliersInfo = () => {
     setLoading(true);
     const getContent = async () => {
       const res: AxiosResponse<iDRes> = await axios.get(
-        `https://nortwind-backend-rodkin.onrender.com/suppliers/${id}`
+        `https://nortwind-backend-rodkin.onrender.com/employees/${id}`
       );
       const [resContent] = res.data.content;
       setLoading(false);
-      setSupplier(resContent);
+      setEmployees(resContent);
       dispatch(addLogAction(res.data.logs));
       dispatch(addResultAction(res.data.content.length));
     };
@@ -52,7 +58,7 @@ const SuppliersInfo = () => {
         <Sidebar />
         <Header />
         <main className="main-section">
-          <h1 className="loading">Loading supplier...</h1>
+          <h1 className="loading">Loading employee...</h1>
         </main>
       </div>
     );
@@ -65,57 +71,70 @@ const SuppliersInfo = () => {
         <div className="section-header">
           <h1 className="page-title">
             <span className="material-icons id-icons">ballot</span>
-            Supplier information
+            Employee information
           </h1>
         </div>
         <div className="id-main-card">
           <div className="id-card-content">
             <div className="id-field-card">
               <div className="id-field-content">
-                <h1 className="id-header">Company Name</h1>
-                <p className="id-desc">{supplier?.companyName}</p>
+                <h1 className="id-header">Name</h1>
+                <p className="id-desc">{employees?.name}</p>
               </div>
               <div className="id-field-content">
-                <h1 className="id-header">Contact Name</h1>
-                <p className="id-desc">{supplier?.contactName}</p>
+                <h1 className="id-header">Title</h1>
+                <p className="id-desc">{employees?.title}</p>
               </div>
               <div className="id-field-content">
-                <h1 className="id-header">Contact Title</h1>
-                <p className="id-desc">{supplier?.contactTitle}</p>
+                <h1 className="id-header">Title Of Courtesy</h1>
+                <p className="id-desc">{employees?.titleOfCourtesy}</p>
+              </div>
+              <div className="id-field-content">
+                <h1 className="id-header">Birth Date</h1>
+                <p className="id-desc">{employees?.birthDate}</p>
+              </div>
+              <div className="id-field-content">
+                <h1 className="id-header">Hire Date</h1>
+                <p className="id-desc">{employees?.hireDate}</p>
               </div>
               <div className="id-field-content">
                 <h1 className="id-header">Address</h1>
-                <p className="id-desc">{supplier?.address}</p>
+                <p className="id-desc">{employees?.address}</p>
               </div>
               <div className="id-field-content without-margin">
                 <h1 className="id-header">City</h1>
-                <p className="id-desc">{supplier?.city}</p>
+                <p className="id-desc">{employees?.city}</p>
               </div>
             </div>
             <div className="id-field-card">
               <div className="id-field-content">
-                <h1 className="id-header">Region</h1>
-                <p className="id-desc">
-                  {supplier?.region ? supplier?.region : "-"}
-                </p>
-              </div>
-              <div className="id-field-content">
                 <h1 className="id-header">Postal Code</h1>
-                <p className="id-desc">{supplier?.postalCode}</p>
+                <p className="id-desc">{employees?.postalCode}</p>
               </div>
               <div className="id-field-content">
                 <h1 className="id-header">Country</h1>
-                <p className="id-desc">{supplier?.country}</p>
+                <p className="id-desc">{employees?.country}</p>
               </div>
               <div className="id-field-content">
-                <h1 className="id-header">Phone</h1>
-                <a className="id-desc">{supplier?.phone}</a>
+                <h1 className="id-header">Home Phone</h1>
+                <p className="id-desc">{employees?.homePhone}</p>
+              </div>
+              <div className="id-field-content">
+                <h1 className="id-header">Extension</h1>
+                <p className="id-desc">{employees?.extension} </p>
+              </div>
+              <div className="id-field-content">
+                <h1 className="id-header">Notes</h1>
+                <p className="id-desc">{employees?.notes} </p>
               </div>
               <div className="id-field-content without-margin">
-                <h1 className="id-header">Home Page</h1>
-                <a className="id-desc">
-                  {supplier?.homePage ? supplier?.homePage : "-"}
-                </a>
+                <h1 className="id-header">Reports To</h1>
+                <Link
+                  className="id-desc link-employees"
+                  to={`/employees/${employees?.reportsTo}`}
+                >
+                  {employees?.reportsToName ? employees?.reportsToName : "-"}
+                </Link>
               </div>
             </div>
           </div>
@@ -128,4 +147,5 @@ const SuppliersInfo = () => {
     </div>
   );
 };
-export default SuppliersInfo;
+
+export default TestEmployees;

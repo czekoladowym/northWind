@@ -11,6 +11,7 @@ import EmployeeInfo from "../screens/employees/employeeInfo";
 import SuppliersInfo from "../screens/suppliers/suppliersInfo";
 import OrderInfo from "../screens/orders/orderInfo";
 import ProductsInfo from "../screens/products/productsInfo";
+import TestEmployees from "../screens/employees/testEmployee";
 
 export const publicRoutes = [
   {
@@ -52,6 +53,10 @@ export const publicRoutes = [
   {
     path: `/employees/:id`,
     element: <EmployeeInfo />,
+  },
+  {
+    path: `/employee/:id`,
+    element: <TestEmployees />,
   },
   {
     path: `/suppliers/:id`,

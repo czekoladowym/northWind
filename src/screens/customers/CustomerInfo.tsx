@@ -87,7 +87,9 @@ const CustomerInfo = () => {
               </div>
               <div className="id-field-content">
                 <h1 className="id-header">Region</h1>
-                <p className="id-desc">-</p>
+                <p className="id-desc">
+                  {content?.region ? content?.region : "-"}
+                </p>
               </div>
               <div className="id-field-content">
                 <h1 className="id-header">Country</h1>
@@ -95,11 +97,13 @@ const CustomerInfo = () => {
               </div>
               <div className="id-field-content">
                 <h1 className="id-header">Phone</h1>
-                <p className="id-desc">{content?.phone} </p>
+                <p className="id-desc">
+                  {content?.phone ? content?.phone : "-"}
+                </p>
               </div>
               <div className="id-field-content without-margin">
                 <h1 className="id-header">Fax</h1>
-                <p className="id-desc ">{content?.fax}</p>
+                <p className="id-desc "> {content?.fax ? content?.fax : "-"}</p>
               </div>
             </div>
           </div>
