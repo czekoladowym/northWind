@@ -78,7 +78,7 @@ const Products = () => {
             <span className="material-icons dark-icon">redo</span>
           </a>
         </div>
-        <table className="products-table">
+        <table className="products-table pc-table">
           <thead className="products">
             <th>Name</th>
             <th>Qt per unit</th>
@@ -102,6 +102,36 @@ const Products = () => {
               </tr>
             ))}
           </tbody>
+        </table>
+        <table className="adaptive-table">
+          {content.map((products) => (
+            <tbody key={products.id}>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Product</td>
+                <td className="adaptive-td">
+                  <Link to={`${products.id}`} className="blue-id">
+                    {products.name}
+                  </Link>
+                </td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Qt Per Unit</td>
+                <td className="adaptive-td">{products.qtPerUnit}</td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Price</td>
+                <td className="adaptive-td">{"$" + products.price}</td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Stock</td>
+                <td className="adaptive-td">{products.stock}</td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Orders</td>
+                <td className="adaptive-td">{products.orders}</td>
+              </tr>
+            </tbody>
+          ))}
         </table>
         <Pagination
           activePage={currentPage}

@@ -36,7 +36,7 @@ export const Header = () => {
           sideBarToggle(e);
         }}
       >
-        <span className="material-icons">menu</span>
+        <span className="material-icons dark-menu-icon">menu</span>
       </a>
       <div id="clock">{time}</div>
 

@@ -11,6 +11,11 @@
 .adaptive-table {
   display: none;
 }
+.dark-menu-icon {
+  color: black;
+  text-decoration: none;
+  user-select: none;
+}
 
 @media (max-width: 1024px) {
   html {
@@ -129,5 +134,16 @@
     flex-direction: column;
     width: 100%;
     margin-bottom: 5px;
+  }
+  .image-column-adaptive {
+    padding: 12px 16px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .rounded-full {
+    height: 96px;
+    width: 96px;
   }
 }

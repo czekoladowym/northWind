@@ -91,7 +91,7 @@ const Customers = () => {
             <span className="material-icons dark-icon">redo</span>
           </a>
         </div>
-        <table className="customers-table">
+        <table className="customers-table pc-table">
           <thead className="customers">
             <th className="avatar-icons-column"></th>
             <th>Company</th>
@@ -127,6 +127,50 @@ const Customers = () => {
               </tr>
             ))}
           </tbody>
+        </table>
+        <table className="adaptive-table">
+          {content.map((customer) => (
+            <tbody key={customer.customerID}>
+              <tr className="image-column-adaptive">
+                <td>
+                  <img
+                    src={`https://avatars.dicebear.com/v2/initials/${abbreviateName(
+                      customer.contactName
+                    )}.svg`}
+                    className="rounded-full"
+                  />
+                </td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Company</td>
+                <td className="adaptive-td">
+                  <Link to={`${customer.customerID}`} className="blue-id">
+                    {customer.companyName}
+                  </Link>
+                </td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Contact</td>
+                <td className="adaptive-td">{customer.contactName}</td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Title</td>
+                <td className="adaptive-td">{customer.contactTitle}</td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">City</td>
+                <td className="adaptive-td">{customer.city}</td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Country</td>
+                <td className="adaptive-td">{customer.country}</td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Phone</td>
+                <td className="adaptive-td">{customer.phone}</td>
+              </tr>
+            </tbody>
+          ))}
         </table>
         <Pagination
           activePage={currentPage}

@@ -86,7 +86,7 @@ const Suppliers = () => {
             <span className="material-icons dark-icon">redo</span>
           </a>
         </div>
-        <table className="suppliers-table">
+        <table className="suppliers-table pc-table">
           <header className="suppliers">
             <th className="avatar-icons-column"></th>
             <th>Company</th>
@@ -119,6 +119,46 @@ const Suppliers = () => {
               </tr>
             ))}
           </tbody>
+        </table>
+        <table className="adaptive-table">
+          {content.map((supplier) => (
+            <tbody key={supplier.id}>
+              <tr className="image-column-adaptive">
+                <td>
+                  <img
+                    src={`https://avatars.dicebear.com/v2/initials/${abbreviateName(
+                      supplier.contact
+                    )}.svg`}
+                    className="rounded-full"
+                  />
+                </td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Company</td>
+                <td className="adaptive-td">
+                  <Link to={`${supplier.id}`} className="blue-id">
+                    {supplier.company}
+                  </Link>
+                </td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Contact</td>
+                <td className="adaptive-td">{supplier.contact}</td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Title</td>
+                <td className="adaptive-td">{supplier.title}</td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">City</td>
+                <td className="adaptive-td">{supplier.city}</td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Country</td>
+                <td className="adaptive-td">{supplier.country}</td>
+              </tr>
+            </tbody>
+          ))}
         </table>
         <Pagination
           activePage={currentPage}

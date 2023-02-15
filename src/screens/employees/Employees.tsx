@@ -83,7 +83,7 @@ const Employees = () => {
             <span className="material-icons dark-icon">redo</span>
           </a>
         </div>
-        <table className="employees-table">
+        <table className="employees-table pc-table">
           <thead className="employees">
             <th className="avatar-icons-column"></th>
             <th>Name</th>
@@ -120,6 +120,46 @@ const Employees = () => {
               </tr>
             ))}
           </tbody>
+        </table>
+        <table className="adaptive-table">
+          {content.map((employee) => (
+            <tbody key={employee.id}>
+              <tr className="image-column-adaptive">
+                <td>
+                  <img
+                    src={`https://avatars.dicebear.com/v2/initials/${abbreviateName(
+                      employee.name
+                    )}.svg`}
+                    className="rounded-full"
+                  />
+                </td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Name</td>
+                <td className="adaptive-td">
+                  <Link to={`${employee.id}`} className="blue-id">
+                    {employee.name}
+                  </Link>
+                </td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Title</td>
+                <td className="adaptive-td">{employee.title}</td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">City</td>
+                <td className="adaptive-td">{employee.city}</td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Phone</td>
+                <td className="adaptive-td">{employee.phone}</td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Country</td>
+                <td className="adaptive-td">{employee.country}</td>
+              </tr>
+            </tbody>
+          ))}
         </table>
         <Pagination
           activePage={currentPage}
