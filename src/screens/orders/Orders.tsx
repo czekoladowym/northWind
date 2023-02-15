@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import Pagination from "../../components/pagination/pagination";
 import { useDispatch } from "react-redux/es/exports";
-import { addLogAction } from "../../store/actions/logActions";
+import { addLogAction, addResultAction } from "../../store/actions/logActions";
 import { Link } from "react-router-dom";
 
 type Order = {
@@ -26,7 +26,7 @@ type Logs = {
 type Response = {
   pages: number;
   content: Order[];
-  logs: Logs;
+  logs: Logs[];
 };
 
 const Orders = () => {
@@ -47,10 +47,12 @@ const Orders = () => {
           },
         }
       );
+      setLoading(false);
       setContent(res.data.content);
       setPageCount(res.data.pages);
+      console.log(res.data.logs);
       dispatch(addLogAction(res.data.logs));
-      setLoading(false);
+      dispatch(addResultAction(res.data.content.length));
     };
     getContent();
   }, [currentPage]);
@@ -59,15 +61,15 @@ const Orders = () => {
     setCurrentPage(page);
   };
 
-  if (loading) {
+  if (loading == true) {
     return (
-      <div>
+      <body>
         <Sidebar />
         <Header />
         <main className="main-section">
           <h1 className="loading">Loading orders...</h1>
         </main>
-      </div>
+      </body>
     );
   }
   return (
@@ -81,7 +83,7 @@ const Orders = () => {
             <span className="material-icons dark-icon">redo</span>
           </a>
         </div>
-        <table className="orders-table">
+        <table className="orders-table pc-table">
           <thead className="orders">
             <th>Id</th>
             <th>Total Price</th>
@@ -111,6 +113,48 @@ const Orders = () => {
               </tr>
             ))}
           </tbody>
+        </table>
+        <table className="adaptive-table">
+          {content.map((order) => (
+            <tbody>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Id</td>
+                <td className="adaptive-td">
+                  <Link to={`${order.id}`} className="blue-id">
+                    {order.id}
+                  </Link>
+                </td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Price</td>
+                <td className="adaptive-td">{"$" + order.price}</td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Products</td>
+                <td className="adaptive-td">{order.products}</td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Quantity</td>
+                <td className="adaptive-td">{order.quantity}</td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Date</td>
+                <td className="adaptive-td">{order.shipped}</td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Name</td>
+                <td className="adaptive-td">{order.shipName}</td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">City</td>
+                <td className="adaptive-td">{order.city}</td>
+              </tr>
+              <tr className="adaptive-row">
+                <td className="adaptive-bold-td">Country</td>
+                <td className="adaptive-td">{order.country}</td>
+              </tr>
+            </tbody>
+          ))}
         </table>
         <Pagination
           activePage={currentPage}

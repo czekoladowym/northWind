@@ -22,7 +22,7 @@ interface Product {
 }
 interface iDRes {
   content: Product[];
-  logs: Logs;
+  logs: Logs[];
 }
 
 const ProductsInfo = () => {
@@ -37,10 +37,10 @@ const ProductsInfo = () => {
         `https://nortwind-backend-rodkin.onrender.com/products/${id}`
       );
       const [resContent] = res.data.content;
+      setLoading(false);
       setProduct(resContent);
       dispatch(addLogAction(res.data.logs));
       dispatch(addResultAction(res.data.content.length));
-      setLoading(false);
     };
     getContent();
   }, []);

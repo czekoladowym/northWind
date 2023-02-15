@@ -8,6 +8,9 @@
 .img {
   width: 24rem;
 }
+.adaptive-table {
+  display: none;
+}
 
 @media (max-width: 1024px) {
   html {
@@ -92,7 +95,39 @@
   .orders-table {
     background-color: #fff;
   }
-  /* .avatar-icons-column {
+  .pc-table {
     display: none;
-  } */
+  }
+  .adaptive-table {
+    display: block;
+    width: 100%;
+    border-collapse: collapse;
+    text-indent: 0;
+  }
+  .adaptive-row {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgb(243 244 246);
+  }
+  tr:nth-child(even) {
+    background-color: #fff;
+  }
+  .adaptive-bold-td {
+    font-weight: 600;
+    line-height: 24px;
+    height: 24px;
+  }
+  .adaptive-td {
+    line-height: 24px;
+    height: 24px;
+  }
+  tbody {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 5px;
+  }
 }

@@ -10,7 +10,7 @@ import { Customer } from "./Customers";
 
 type iDRes = {
   content: Customer[];
-  logs: Logs;
+  logs: Logs[];
 };
 
 const CustomerInfo = () => {
@@ -25,10 +25,10 @@ const CustomerInfo = () => {
         `https://nortwind-backend-rodkin.onrender.com/customers/${id}`
       );
       const [resContent] = res.data.content;
+      setLoading(false);
       setContent(resContent);
       dispatch(addLogAction(res.data.logs));
       dispatch(addResultAction(res.data.content.length));
-      setLoading(false);
     };
     getContent();
   }, []);

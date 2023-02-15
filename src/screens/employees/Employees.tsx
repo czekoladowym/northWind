@@ -22,26 +22,33 @@ type Logs = {
 };
 
 type Response = {
+  pages: number;
   content: Employee[];
-  logs: Logs;
+  logs: Logs[];
 };
 
 const Employees = () => {
   const [content, setContent] = useState<Employee[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [contentPerPage] = useState<number>(20);
+  const [pageCount, setPageCount] = useState<number>(0);
   const dispatch = useDispatch();
   useEffect(() => {
     setLoading(true);
     const getContent = async () => {
       const res: AxiosResponse<Response> = await axios.get(
-        "https://nortwind-backend-rodkin.onrender.com/employees"
+        "https://nortwind-backend-rodkin.onrender.com/employees",
+        {
+          params: {
+            page: currentPage,
+          },
+        }
       );
+      setLoading(false);
       setContent(res.data.content);
+      setPageCount(res.data.pages);
       dispatch(addLogAction(res.data.logs));
       dispatch(addResultAction(res.data.content.length));
-      setLoading(false);
     };
     getContent();
   }, []);
@@ -54,11 +61,6 @@ const Employees = () => {
   }
 
   const paginate = (pageNum: number) => setCurrentPage(pageNum);
-
-  const indexOfLastContent = currentPage * contentPerPage;
-  const indexOfFirstContent = indexOfLastContent - contentPerPage;
-  const currentContent = content.slice(indexOfFirstContent, indexOfLastContent);
-
   if (loading) {
     return (
       <div>
@@ -92,7 +94,7 @@ const Employees = () => {
             <th></th>
           </thead>
           <tbody>
-            {currentContent.map((employee, i) => (
+            {content.map((employee, i) => (
               // ENTER ID
               <tr key={employee.id}>
                 <td className="image-column">
@@ -121,7 +123,7 @@ const Employees = () => {
         </table>
         <Pagination
           activePage={currentPage}
-          pagesNumber={content.length / contentPerPage}
+          pagesNumber={pageCount}
           onChangePage={paginate}
         />
       </main>

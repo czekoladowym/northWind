@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import axios, { Axios, AxiosResponse } from "axios";
 import Pagination from "../../components/pagination/pagination";
 import { useDispatch } from "react-redux/es/exports";
-import { addLogAction } from "../../store/actions/logActions";
+import { addLogAction, addResultAction } from "../../store/actions/logActions";
 import { Link } from "react-router-dom";
 
 type Product = {
@@ -22,36 +22,39 @@ type Logs = {
 };
 
 type Response = {
+  pages: number;
   content: Product[];
-  logs: Logs;
+  logs: Logs[];
 };
 
 const Products = () => {
   const [content, setContent] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [contentPerPage] = useState<number>(20);
+  const [pageCount, setPageCount] = useState<number>(0);
   const dispatch = useDispatch();
   useEffect(() => {
     setLoading(true);
     const getContent = async () => {
       const res: AxiosResponse<Response> = await axios.get(
-        "https://nortwind-backend-rodkin.onrender.com/products"
+        `https://nortwind-backend-rodkin.onrender.com/products`,
+        {
+          params: {
+            page: currentPage,
+          },
+        }
       );
-      setContent(res.data.content);
-      dispatch(addLogAction(res.data.logs));
       setLoading(false);
+      setContent(res.data.content);
+      setPageCount(res.data.pages);
+      dispatch(addLogAction(res.data.logs));
+      dispatch(addResultAction(res.data.content.length));
     };
 
     getContent();
-  }, []);
-  // change page
-  const paginate = (pageNum: number) => setCurrentPage(pageNum);
+  }, [currentPage]);
 
-  // get current content
-  const indexOfLastContent = currentPage * contentPerPage;
-  const indexOfFirstContent = indexOfLastContent - contentPerPage;
-  const currentContent = content.slice(indexOfFirstContent, indexOfLastContent);
+  const paginate = (pageNum: number) => setCurrentPage(pageNum);
 
   if (loading) {
     return (
@@ -85,7 +88,7 @@ const Products = () => {
             <th></th>
           </thead>
           <tbody>
-            {currentContent.map((product) => (
+            {content.map((product) => (
               <tr key={product.id}>
                 <td className="row-item">
                   <Link to={`/products/${product.id}`} className="blue-id">
@@ -102,7 +105,7 @@ const Products = () => {
         </table>
         <Pagination
           activePage={currentPage}
-          pagesNumber={content.length / contentPerPage}
+          pagesNumber={pageCount}
           onChangePage={paginate}
         />
       </main>

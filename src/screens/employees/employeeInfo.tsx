@@ -29,7 +29,7 @@ type Employee = {
 };
 type iDRes = {
   content: Employee[];
-  logs: Logs;
+  logs: Logs[];
 };
 
 const EmployeeInfo = () => {
@@ -44,10 +44,10 @@ const EmployeeInfo = () => {
         `https://nortwind-backend-rodkin.onrender.com/employees/${id}`
       );
       const [resContent] = res.data.content;
+      setLoading(false);
       setEmployees(resContent);
       dispatch(addLogAction(res.data.logs));
       dispatch(addResultAction(res.data.content.length));
-      setLoading(false);
     };
     getContent();
   }, []);

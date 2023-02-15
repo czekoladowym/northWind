@@ -36,7 +36,7 @@ type Order = {
 };
 type iDRes = {
   content: Order[];
-  logs: Logs;
+  logs: Logs[];
 };
 
 const OrderInfo = () => {
@@ -51,10 +51,10 @@ const OrderInfo = () => {
         `https://nortwind-backend-rodkin.onrender.com/orders/${id}`
       );
       const [resContent] = res.data.content;
+      setLoading(false);
       setOrder(resContent);
       dispatch(addLogAction(res.data.logs));
       dispatch(addResultAction(res.data.content.length));
-      setLoading(false);
     };
     getContent();
   }, []);

@@ -34,17 +34,17 @@ export const logsSlice = createSlice({
   name: "logs",
   initialState,
   reducers: {
-    addLog: (state: LogState, action: PayloadAction<Log>) => {
-      state.logs.push(action.payload);
-      state.queryCount++;
-      state.metricsCount.select +=
-        action.payload.sql.split(/select/i).length - 1;
-      state.metricsCount.where += action.payload.sql.split(/where/i).length - 1;
-      state.metricsCount.leftJoin +=
-        action.payload.sql.split(/join/i).length - 1;
+    addLog: (state: LogState, action: PayloadAction<Log[]>) => {
+      action.payload.map((log) => {
+        state.logs.push(log);
+        state.queryCount++;
+        state.metricsCount.select += log.sql.split(/SELECT/i).length - 1;
+        state.metricsCount.where += log.sql.split(/WHERE/i).length - 1;
+        state.metricsCount.leftJoin += log.sql.split(/JOIN/i).length - 1;
+      });
     },
     addResultCount: (state: LogState, action: PayloadAction<number>) => {
-      state.resultCount += action.payload;
+      state.resultCount += action.payload + 1;
     },
   },
 });

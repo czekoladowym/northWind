@@ -23,7 +23,7 @@ type Supplier = {
 };
 type iDRes = {
   content: Supplier[];
-  logs: Logs;
+  logs: Logs[];
 };
 
 const SuppliersInfo = () => {
@@ -38,10 +38,10 @@ const SuppliersInfo = () => {
         `https://nortwind-backend-rodkin.onrender.com/suppliers/${id}`
       );
       const [resContent] = res.data.content;
+      setLoading(false);
       setSupplier(resContent);
       dispatch(addLogAction(res.data.logs));
       dispatch(addResultAction(res.data.content.length));
-      setLoading(false);
     };
     getContent();
   }, []);
