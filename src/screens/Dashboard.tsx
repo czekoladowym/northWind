@@ -67,7 +67,7 @@ const Dashboard = () => {
             </p>
             <div className="log-section">
               {logs.logs.map((log: Log, i) => (
-                <div>
+                <div key={i}>
                   <p className="log-time">
                     {log.date}, {log.requestTime}
                   </p>

@@ -116,7 +116,7 @@ const Orders = () => {
         </table>
         <table className="adaptive-table">
           {content.map((order) => (
-            <tbody>
+            <tbody key={order.id}>
               <tr className="adaptive-row">
                 <td className="adaptive-bold-td">Id</td>
                 <td className="adaptive-td">

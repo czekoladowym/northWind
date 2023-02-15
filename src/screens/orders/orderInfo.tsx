@@ -170,7 +170,7 @@ const OrderInfo = () => {
             </thead>
             <tbody>
               {order?.productsInOrder.map((product) => (
-                <tr>
+                <tr key={product.id}>
                   <td className="row-item">
                     <Link className="blue-id" to={`/products/${product.id}`}>
                       {product.product}
