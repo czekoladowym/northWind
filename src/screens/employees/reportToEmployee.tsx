@@ -32,7 +32,7 @@ type iDRes = {
   logs: Logs[];
 };
 
-const TestEmployees = () => {
+const ReportToEmployee = () => {
   const [employees, setEmployees] = useState<Employee | undefined>();
   const { id } = useParams();
   const [loading, setLoading] = useState<boolean>(false);
@@ -148,4 +148,4 @@ const TestEmployees = () => {
   );
 };
 
-export default TestEmployees;
+export default ReportToEmployee;
